@@ -1,0 +1,49 @@
+@mixin flexEnd{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.nav-bar{
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    height: 5rem;
+    background-color: rgba(255,255,255,0.5);
+    
+    
+    .logoLink{
+        @include flexEnd();
+        justify-content:left;
+
+        .logo{
+       
+            background-image: url('../../../assets/pictures/logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            aspect-ratio: 1/0.7;
+            
+        }
+    }
+  
+
+    .bookFlyButton{
+      @include flexEnd();
+
+      button{
+        transform: scaleY(1.5)
+      }
+      
+    }
+    
+
+    .accountButton{
+        @include flexEnd();
+
+        button{
+            transform: scale(1.5)
+          }
+    }
+}

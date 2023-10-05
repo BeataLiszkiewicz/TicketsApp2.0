@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TicketsApp2.0": {
+    "TicketsApp2": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/tickets-app2.0",
+            "outputPath": "dist/tickets-app2",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "TicketsApp2.0:build:production"
+              "browserTarget": "TicketsApp2:build:production"
             },
             "development": {
-              "browserTarget": "TicketsApp2.0:build:development"
+              "browserTarget": "TicketsApp2:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "TicketsApp2.0:build"
+            "browserTarget": "TicketsApp2:build"
           }
         },
         "test": {

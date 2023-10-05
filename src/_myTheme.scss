@@ -1,0 +1,117 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$bright-maya-blue-palette: (
+  50: #e2f5ff,
+  100: #b5e4ff,
+  200: #84d2ff,
+  300: #55c1ff,
+  400: #38b3fe,
+  500: #31a5fb,
+  600: #3097eb,
+  700: #2f84d6,
+  800: #2c73c2,
+  900: #29539e,
+  A100: #c9ccff,
+  A200: #a3abff,
+  A400: #556cff,
+  A700: #1739e3,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$prussian-blue-palette:(
+    50: #e6ebef,
+  100: #beccd8,
+  200: #96abbe,
+  300: #6e8aa4,
+  400: #4d7192,
+  500: #275a83,
+  600: #1f527b,
+  700: #16496f,
+  800: #113f63,
+  900: #102e4a,
+  A100: #bdc0d7,
+  A200: #9398bc,
+  A400: #4e5490,
+  A700: #242a6c,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$fireengine-red-palette:(
+    50: #ffeaef,
+  100: #ffcbd3,
+  200: #f3979b,
+  300: #eb6d74,
+  400: #f64852,
+  500: #fc3037,
+  600: #ed2437,
+  700: #db1630,
+  800: #ce0729,
+  900: #c0001c,
+  A100: #edb5da,
+  A200: #e485c1,
+  A400: #db1693,
+  A700: #b30070,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$bluesky-primary: mat.define-palette($bright-maya-blue-palette, 400);
+$bluesky-accent: mat.define-palette($prussian-blue-palette);
+$bluesky-warn: mat.define-palette($fireengine-red-palette, 800);
+$my-typography: mat.define-typography-config();
+
+$bluesky-theme: mat.define-light-theme((
+  color: (
+    primary: $bluesky-primary,
+    accent: $bluesky-accent,
+    warn: $bluesky-warn,
+  ),
+  typography: $my-typography,
+));
+
+@include mat.all-component-themes($bluesky-theme);
