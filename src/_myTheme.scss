@@ -68,7 +68,7 @@ $prussian-blue-palette:(
 );
 
 $fireengine-red-palette:(
-    50: #ffeaef,
+  50: #ffeaef,
   100: #ffcbd3,
   200: #f3979b,
   300: #eb6d74,
@@ -101,7 +101,7 @@ $fireengine-red-palette:(
 );
 
 $bluesky-primary: mat.define-palette($bright-maya-blue-palette, 400);
-$bluesky-accent: mat.define-palette($prussian-blue-palette);
+$bluesky-accent: mat.define-palette($prussian-blue-palette, A700);
 $bluesky-warn: mat.define-palette($fireengine-red-palette, 800);
 $my-typography: mat.define-typography-config();
 

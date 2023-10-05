@@ -1,0 +1,93 @@
+@mixin advPic {
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 5%;
+  z-index: 1;
+}
+
+@mixin advGrid {
+  display: grid;
+}
+
+@mixin stack {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.homeContainer {
+  width: 80%;
+  height: 80vh;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 45% 1fr 45%;
+  grid-template-rows: 47% 1fr 47%;
+
+  .firstPic {
+    @include advGrid();
+    grid-column: 1;
+    grid-row: 1;
+
+    .back {
+      @include stack();
+      @include advPic();
+      background-image: url("../../../assets/pictures/travelPlan.svg");
+
+      &:hover{
+        opacity: 0.2;
+      }
+    }
+
+    h2 {
+      @include stack();
+    }
+  }
+
+  .secondPic {
+    @include advGrid();
+    grid-column: 3;
+    grid-row: 1;
+
+    .back {
+      @include stack();
+      @include advPic();
+      background-image: url("../../../assets/pictures/goodFood.svg");
+    }
+
+    h2 {
+      @include stack();
+    }
+  }
+
+  .thirdPic {
+    @include advGrid();
+    grid-column: 1;
+    grid-row: 3;
+
+    .back {
+      @include stack();
+      @include advPic();
+      background-image: url("../../../assets/pictures/airCrew.svg");
+    }
+
+    h2 {
+      @include stack();
+    }
+  }
+
+  .fourthPic {
+    @include advGrid();
+    grid-column: 3;
+    grid-row: 3;
+
+    .back {
+      @include stack();
+      @include advPic();
+      background-image: url("../../../assets/pictures/inside.svg");
+    }
+    h2 {
+      @include stack();
+    }
+  }
+}
