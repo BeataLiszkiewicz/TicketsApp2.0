@@ -1,21 +1,34 @@
 <div class="homeContainer">
   <div class="firstPic">
-    <h2>Unique destinations</h2>
-    <div class="back First"></div>
+    <h2 >Unique<br> destinations</h2>
+    <div class="back First" ></div>
   </div>
   <div class="secondPic">
-    <h2>Delicious meals</h2>
-    <div class="back Second"></div>
+    <h2>Delicious<br> meals</h2>
+    <div class="back Second" appHoverOpacity></div>
   </div>
   <div class="planeContainer"></div>
   <div class="thirdPic">
-    <h2>Expirienced crew</h2>
-    <div class="back Third"></div>
+    <h2>Expirienced<br> crew</h2>
+    <div class="back Third" appHoverOpacity></div>
   </div>
   <div class="fourthPic">
-    <h2>Comfortable space</h2>
-    <div class="back Fourth"></div>
+    <h2>Comfortable<br> space</h2>
+    <div class="back Fourth" appHoverOpacity></div>
   </div>
 </div>
+<div class="destinations page" [ngStyle]="{
+    background: 'url(' + placePictureAgain + ') no-repeat center center/ cover'
+  }"><div [ngStyle]="{
+    background: 'url(' + placePicture + ') no-repeat center center/ cover'
+  }" class="secondBackground"></div>
+  <span id="city">{{cityName}}</span></div>
+
+
+  
+
+<div class="food page"></div>
+<div class="crew page"></div>
+<div class="space page"></div>
 
 
