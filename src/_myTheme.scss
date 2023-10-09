@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @include mat.core();
 
 $bright-maya-blue-palette: (
@@ -31,11 +31,11 @@ $bright-maya-blue-palette: (
     A200: rgba(black, 0.87),
     A400: white,
     A700: white,
-  )
+  ),
 );
 
-$prussian-blue-palette:(
-    50: #e6ebef,
+$prussian-blue-palette: (
+  50: #e6ebef,
   100: #beccd8,
   200: #96abbe,
   300: #6e8aa4,
@@ -64,10 +64,10 @@ $prussian-blue-palette:(
     A200: rgba(black, 0.87),
     A400: white,
     A700: white,
-  )
+  ),
 );
 
-$fireengine-red-palette:(
+$fireengine-red-palette: (
   50: #ffeaef,
   100: #ffcbd3,
   200: #f3979b,
@@ -97,21 +97,26 @@ $fireengine-red-palette:(
     A200: rgba(black, 0.87),
     A400: white,
     A700: white,
-  )
+  ),
 );
 
-$bluesky-primary: mat.define-palette($bright-maya-blue-palette, 400);
+$bluesky-primary: mat.define-palette($bright-maya-blue-palette, 50);
 $bluesky-accent: mat.define-palette($prussian-blue-palette, A700);
 $bluesky-warn: mat.define-palette($fireengine-red-palette, 800);
 $my-typography: mat.define-typography-config();
 
-$bluesky-theme: mat.define-light-theme((
-  color: (
-    primary: $bluesky-primary,
-    accent: $bluesky-accent,
-    warn: $bluesky-warn,
-  ),
-  typography: $my-typography,
-));
+$background-neutral: map-get($prussian-blue-palette, 900);
+$background-primary: map-get($bright-maya-blue-palette, 50);
+
+$bluesky-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $bluesky-primary,
+      accent: $bluesky-accent,
+      warn: $bluesky-warn,
+    ),
+    typography: $my-typography,
+  )
+);
 
 @include mat.all-component-themes($bluesky-theme);
