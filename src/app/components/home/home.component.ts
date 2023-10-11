@@ -1,6 +1,12 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import listOfCities from '../../../assets/data/allCities.json';
-import { BehaviorSubject, Observable, Subscription, interval } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  fromEvent,
+  interval,
+} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,54 +16,74 @@ import { BehaviorSubject, Observable, Subscription, interval } from 'rxjs';
 export class HomeComponent {
   cityList: any;
   cityName: string = 'Antalya';
-  cityNumber: number = 1;
+  cityNumber: number = 0;
   cityPosition!: Number;
-  interval: number = 100000;
+  interval: any;
+  intervalWorks: boolean = false;
+  picturePosition!: number;
+  intervalSubscription: Subscription = new Subscription();
   placePicture: string = 'assets/pictures/Antalya.jpg';
   placePictureAgain: string = 'assets/pictures/Antalya.jpg';
 
   @ViewChild('destinationBackground', { static: true })
   destinationBackground!: ElementRef;
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll() {
-    if (
-      this.destinationBackground.nativeElement.getBoundingClientRect().top <
-        300 &&
-      this.destinationBackground.nativeElement.getBoundingClientRect().top >
-        -500
-    ) {this.interval=1000
-    }else{
-      this.interval=100000
-    }
-  }
+  @ViewChild('homeContainer', { static: true })
+  homeContainer!: ElementRef;
 
   ngOnInit() {
-    
-    console.log(this.interval);
+    this.changeCityBackground();
     this.cityList = listOfCities;
-    setInterval(() => {
-      this.changeBackgroundCity(this.cityNumber);
-    }, this.interval);
   }
 
+  changeCityBackground() {
+    this.intervalSubscription = fromEvent(window, 'scroll').subscribe({
+      next: (res: any) => {
+        this.picturePosition =
+          this.destinationBackground.nativeElement.getBoundingClientRect().top;
 
-  changeBackgroundCity(param: number) {
-    this.placePictureAgain = `assets/pictures/${this.cityList[param].picture}.jpg`;
+        if (
+          !this.intervalWorks &&
+          this.picturePosition < 500 &&
+          this.picturePosition > -800
+        ) {
+          this.interval = setInterval(() => {
+            this.cityName="";
+            this.placePicture = `assets/pictures/${
+              this.cityList[this.cityNumber].picture
+            }.jpg`;
 
-    setTimeout(() => {
-      this.placePicture = `assets/pictures/${this.cityList[param].picture}.jpg`;
-    }, 4000);
+            setTimeout(() => {
+              this.cityName = this.cityList[this.cityNumber].city;
+            }, 3000);
 
-    if (this.cityNumber === 10) {
-      this.cityNumber = 0;
-    } else {
-      this.cityNumber += 1;
-    }
+            setTimeout(() => {
+              this.placePictureAgain = `assets/pictures/${
+                this.cityList[this.cityNumber].picture
+              }.jpg`;
+
+              if (this.cityNumber === 10) {
+                this.cityNumber = 0;
+              } else {
+                this.cityNumber += 1;
+              }
+            }, 4000);
+
+            // setTimeout(() => {
+            //   this.cityName = '';
+            // }, 7900);
+          }, 8000);
+
+          this.intervalWorks = true;
+        } else if (
+          this.intervalWorks &&
+          (this.picturePosition > 500 || this.picturePosition < -800)
+        ) {
+          clearInterval(this.interval);
+          this.interval = null;
+          this.intervalWorks = false;
+        }
+      },
+    });
   }
-
-  // @HostListener('window:scroll', ['$event'])
-  // onScroll(e:any) {
-  //   console.log('window', e);
-  // }
 }

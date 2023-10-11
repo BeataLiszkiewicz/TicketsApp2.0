@@ -1,3 +1,5 @@
+@import '../../../myTheme';
+
 @mixin flexEnd{
     display: flex;
     justify-content: flex-end;
@@ -9,6 +11,7 @@
     display: grid;
     grid-template-columns: 20% 1fr 20%;
     height: 5rem;
+    background-color: $background-neutral;
     
     .logoLink{
         @include flexEnd();
