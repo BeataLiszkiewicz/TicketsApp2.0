@@ -1,0 +1,29 @@
+[
+  {
+    "Starters": [
+      { "name": "Risotto", "ingredients": ["rice", "lobster", "barnacles"] },
+      {
+        "name": "Tartare",
+        "ingredients": ["squid", "green apple juice", "licorice emulsion"]
+      },
+      {
+        "name": "Soup",
+        "ingredients": ["schrimps", "tomatoes", "celery", "mint"]
+      }
+    ],
+    "MainCourse":[
+        { "name": "Norway", "ingredients": ["lobster", "charantaise melon", "pine nuts"] },
+        {
+          "name": "Patagonian",
+          "ingredients": ["toothfish", "viennese sake", "oscietra N25"]
+        },
+        {
+          "name": "Breton",
+          "ingredients": ["turbot", "apricot", "vin jaune"]
+        }
+    ],
+    "Dessert":{
+        "name": "Frenzy", "ingredients": ["banana", "chocolate", "curry"]
+    }
+  }
+]

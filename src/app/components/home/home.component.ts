@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import listOfCities from '../../../assets/data/allCities.json';
+import menu from '../../../assets/data/menu.json';
+import { Menu } from 'src/app/interfaces/menu';
 import {
   BehaviorSubject,
   Observable,
@@ -20,20 +22,29 @@ export class HomeComponent {
   cityPosition!: Number;
   interval: any;
   intervalWorks: boolean = false;
-  picturePosition!: number;
   intervalSubscription: Subscription = new Subscription();
+  planeMenu!:Menu[];
+  picturePosition!: number;
   placePicture: string = 'assets/pictures/Antalya.jpg';
   placePictureAgain: string = 'assets/pictures/Antalya.jpg';
 
   @ViewChild('destinationBackground', { static: true })
   destinationBackground!: ElementRef;
 
-  @ViewChild('homeContainer', { static: true })
-  homeContainer!: ElementRef;
+  @ViewChild('foodMenu', { static: true })
+  foodMenu!: ElementRef;
+
+  @ViewChild('crew', { static: true })
+  crew!: ElementRef;
+
+  @ViewChild('insidePlane', { static: true })
+  insidePlane!: ElementRef;
 
   ngOnInit() {
     this.changeCityBackground();
     this.cityList = listOfCities;
+   this.planeMenu=menu;
+  
   }
 
   changeCityBackground() {
@@ -67,12 +78,10 @@ export class HomeComponent {
               } else {
                 this.cityNumber += 1;
               }
-            }, 4000);
+            }, 3000);
 
-            // setTimeout(() => {
-            //   this.cityName = '';
-            // }, 7900);
-          }, 8000);
+            
+          }, 5000);
 
           this.intervalWorks = true;
         } else if (
@@ -85,5 +94,20 @@ export class HomeComponent {
         }
       },
     });
+  }
+
+  goToCity(){
+    this.destinationBackground.nativeElement.scrollIntoView();
+  }
+  goToFood(){
+    this.foodMenu.nativeElement.scrollIntoView();
+  }
+
+  goToCrew(){
+    this.crew.nativeElement.scrollIntoView();
+  }
+
+  seeInside(){
+    this.insidePlane.nativeElement.scrollIntoView()
   }
 }

@@ -1,27 +1,29 @@
 <div class="homeContainer" #homeContainer>
-  <div class="firstPic">
+  <div class="firstPic" (click)="goToCity()">
     <h2>
       Unique<br />
       destinations
     </h2>
     <div class="back First"></div>
   </div>
-  <div class="secondPic">
+  <div class="secondPic" (click)="goToFood()">
     <h2>
       Delicious<br />
       meals
     </h2>
     <div class="back Second" appHoverOpacity></div>
   </div>
-  <div class="planeContainer"></div>
-  <div class="thirdPic">
+  <div class="planeShadow">
+    <div class="plane"></div>
+  </div>
+  <div class="thirdPic" (click)="goToCrew()">
     <h2>
       Expirienced<br />
       crew
     </h2>
     <div class="back Third" appHoverOpacity></div>
   </div>
-  <div class="fourthPic">
+  <div class="fourthPic" (click)="seeInside()">
     <h2>
       Comfortable<br />
       space
@@ -47,6 +49,16 @@
   </div>
 </div>
 
-<div class="food page"></div>
-<div class="crew page"></div>
-<div class="space page"></div>
+<div class="food page" #foodMenu>
+  <div class="menuPage">
+    <p class="menu">Menu</p>
+    <section class="starters" *ngFor="let starter of planeMenu[0].Starters">
+      <div class="starter"><p>{{starter.name}}</p>
+      <p class="ingredients" *ngFor="let ingList of starter.ingredients">|{{ingList}}|</p></div>
+    </section>
+    <section class="mainCourse"></section>
+    <section class="dessert"></section>
+  </div>
+</div>
+<div class="crew page" #crew></div>
+<div class="space page" #insidePlane></div>
