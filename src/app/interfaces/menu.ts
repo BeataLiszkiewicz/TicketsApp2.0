@@ -6,5 +6,5 @@ export interface dishes{
 export interface Menu {
 Starters:dishes[],
 MainCourse:dishes[],
-Dessert:dishes
+Dessert:dishes[]
 }

@@ -22,8 +22,8 @@
           "ingredients": ["turbot", "apricot", "vin jaune"]
         }
     ],
-    "Dessert":{
+    "Dessert":[{
         "name": "Frenzy", "ingredients": ["banana", "chocolate", "curry"]
-    }
+    }]
   }
 ]

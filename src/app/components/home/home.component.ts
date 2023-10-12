@@ -18,7 +18,7 @@ import {
 export class HomeComponent {
   cityList: any;
   cityName: string = 'Antalya';
-  cityNumber: number = 0;
+  cityNumber: number = 1;
   cityPosition!: Number;
   interval: any;
   intervalWorks: boolean = false;
@@ -66,7 +66,7 @@ export class HomeComponent {
 
             setTimeout(() => {
               this.cityName = this.cityList[this.cityNumber].city;
-            }, 3000);
+            }, 1500);
 
             setTimeout(() => {
               this.placePictureAgain = `assets/pictures/${
@@ -78,10 +78,10 @@ export class HomeComponent {
               } else {
                 this.cityNumber += 1;
               }
-            }, 3000);
+            }, 2500);
 
             
-          }, 5000);
+          }, 4000);
 
           this.intervalWorks = true;
         } else if (

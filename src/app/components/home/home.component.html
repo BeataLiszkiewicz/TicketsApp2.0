@@ -8,6 +8,7 @@
   </div>
   <div class="secondPic" (click)="goToFood()">
     <h2>
+      
       Delicious<br />
       meals
     </h2>
@@ -45,19 +46,49 @@
       }"
       class="secondBackground"
     ></div>
-    <span id="city">{{ cityName }}</span>
+    
+    <span id="city">{{ cityName }} </span>
   </div>
 </div>
 
 <div class="food page" #foodMenu>
   <div class="menuPage">
-    <p class="menu">Menu</p>
-    <section class="starters" *ngFor="let starter of planeMenu[0].Starters">
-      <div class="starter"><p>{{starter.name}}</p>
-      <p class="ingredients" *ngFor="let ingList of starter.ingredients">|{{ingList}}|</p></div>
-    </section>
-    <section class="mainCourse"></section>
-    <section class="dessert"></section>
+    <h1 class="menu">THIS WEEK MENU</h1>
+    <h3>STARTERS</h3>
+    <div class="dishContainer">
+      <div *ngFor="let starter of planeMenu[0].Starters">
+        <section class="starters dish">
+          <p>{{ starter.name }}</p>
+          <div class="ingredients">
+            <p *ngFor="let ingList of starter.ingredients">{{ ingList }}</p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <h3>MAIN COURSES</h3>
+    <div class="dishContainer">
+      <div *ngFor="let main of planeMenu[0].MainCourse">
+        <section class="mainCourses dish">
+          <p>{{ main.name }}</p>
+
+          <div class="ingredients">
+            <p *ngFor="let ingList of main.ingredients">{{ ingList }}</p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <h3>DESSERTS</h3>
+    <div class="dishContainer">
+      <div *ngFor="let dessert of planeMenu[0].Dessert">
+        <section class="desserts">
+          <p>{{ dessert.name }}</p>
+
+          <div class="ingredients">
+            <p *ngFor="let ingList of dessert.ingredients">{{ ingList }}</p>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
 </div>
 <div class="crew page" #crew></div>
