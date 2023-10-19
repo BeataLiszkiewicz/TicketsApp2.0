@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import listOfCities from '../../../assets/data/allCities.json';
 import menu from '../../../assets/data/menu.json';
+import crew from '../../../assets/data/crew.json';
 import { Menu } from 'src/app/interfaces/menu';
 import {
   BehaviorSubject,
@@ -19,14 +20,17 @@ export class HomeComponent {
   cityList: any;
   cityName: string = 'Antalya';
   cityNumber: number = 1;
+  crewCollection!: Array<object>;
+  crewToggle: any;
   cityPosition!: Number;
+  crewPosition: Array<string> = ['Fly attendant', 'Ground crew', 'Pilot'];
   interval: any;
   intervalWorks: boolean = false;
   intervalSubscription: Subscription = new Subscription();
-  planeMenu!:Menu[];
   picturePosition!: number;
   placePicture: string = 'assets/pictures/Antalya.jpg';
   placePictureAgain: string = 'assets/pictures/Antalya.jpg';
+  planeMenu!: Menu[];
 
   @ViewChild('destinationBackground', { static: true })
   destinationBackground!: ElementRef;
@@ -43,8 +47,8 @@ export class HomeComponent {
   ngOnInit() {
     this.changeCityBackground();
     this.cityList = listOfCities;
-   this.planeMenu=menu;
-  
+    this.planeMenu = menu;
+    this.makeCrewCollection();
   }
 
   changeCityBackground() {
@@ -59,7 +63,7 @@ export class HomeComponent {
           this.picturePosition > -800
         ) {
           this.interval = setInterval(() => {
-            this.cityName="";
+            this.cityName = '';
             this.placePicture = `assets/pictures/${
               this.cityList[this.cityNumber].picture
             }.jpg`;
@@ -79,8 +83,6 @@ export class HomeComponent {
                 this.cityNumber += 1;
               }
             }, 2500);
-
-            
           }, 4000);
 
           this.intervalWorks = true;
@@ -96,18 +98,34 @@ export class HomeComponent {
     });
   }
 
-  goToCity(){
+  goToCity() {
     this.destinationBackground.nativeElement.scrollIntoView();
   }
-  goToFood(){
+  goToFood() {
     this.foodMenu.nativeElement.scrollIntoView();
   }
 
-  goToCrew(){
+  goToCrew() {
     this.crew.nativeElement.scrollIntoView();
   }
 
-  seeInside(){
-    this.insidePlane.nativeElement.scrollIntoView()
+  seeInside() {
+    this.insidePlane.nativeElement.scrollIntoView();
+  }
+
+  makeCrewCollection() {
+    this.crewCollection = crew
+      .filter((person) => this.crewPosition.includes(person.position))
+      .map((persona) => ({
+        image: `assets/pictures/crew/${persona.name}.jpg`,
+        thumbImage: `assets/pictures/crew/${persona.name}.jpg`,
+        title: persona.name,
+        alt: persona.name,
+      }));
+  }
+
+  choseCrew() {
+    this.crewPosition = this.crewToggle;
+    this.makeCrewCollection();
   }
 }

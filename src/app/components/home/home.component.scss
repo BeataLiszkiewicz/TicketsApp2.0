@@ -7,13 +7,11 @@
   width: 100%;
   border-radius: 5%;
   z-index: -1;
- 
 }
 
 @mixin advGrid {
   display: grid;
   position: relative;
-  cursor: pointer;
 
   &:hover {
     h2 {
@@ -153,8 +151,6 @@ h2 {
       right: 2rem;
       text-shadow: 5px 5px 5px rgb(89, 80, 80);
       transition: ease-in-out 300ms;
-
-      
     }
   }
 }
@@ -164,21 +160,21 @@ h2 {
   font-family: "Satisfy", cursive;
   font-size: 2rem;
   color: $background-primary;
+  height: fit-content;
 
   h3 {
     width: 100%;
-    margin:3rem 0 1.5rem 0;
+    margin: 3rem 0 1.5rem 0;
     border-bottom: 1px solid white;
   }
   .menuPage {
     @include flexCenter();
     flex-direction: column;
-    
 
     .dishContainer {
       @include flexCenter();
       flex-direction: row;
-      
+
       .dish {
         @include flexCenter();
         flex-direction: column;
@@ -193,7 +189,22 @@ h2 {
   }
 }
 
-.crew{
-  background-color: $background-primary;
-  height: 95vh;
+.crew {
+  
+  height: 60vh;
+  width: 90vw;
+  padding: 0 3vw;
+  background-color: rgba($background-primary,0.3);
+  box-shadow: -5px -5px 5px  10px $background-warn;
+  transform: skewX(1deg);
+
+ .toggleButtonCrew{
+  @include flexCenter();
+  flex-direction: row;
+  border: none; 
+ }
+
+ .singleButton{
+  background-color: $background-neutral-light;
+ }
 }
