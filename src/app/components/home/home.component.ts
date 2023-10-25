@@ -119,7 +119,7 @@ export class HomeComponent {
       .map((persona) => ({
         image: `assets/pictures/crew/${persona.name}.jpg`,
         thumbImage: `assets/pictures/crew/${persona.name}.jpg`,
-        title: persona.name,
+        title: `${persona.name}, ${persona.position} for ${persona.experience}`,
         alt: persona.name,
       }));
   }
