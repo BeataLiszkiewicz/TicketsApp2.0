@@ -11,7 +11,7 @@
     display: grid;
     grid-template-columns: 20% 1fr 20%;
     height: 5rem;
-    background-color: $background-neutral;
+    background-color: rgba($background-neutral,0.7);
     
     .logoLink{
         @include flexEnd();

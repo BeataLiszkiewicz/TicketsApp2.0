@@ -8,14 +8,15 @@
   </div>
   <div class="secondPic" (click)="goToFood()">
     <h2>
-      
       Delicious<br />
       meals
     </h2>
     <div class="back Second" appHoverOpacity></div>
   </div>
-  <div class="planeShadow">
-    <div class="plane"></div>
+  <div class="planeShadowContainer">
+    <div class="planeShadow">
+      <div class="plane"></div>
+    </div>
   </div>
   <div class="thirdPic" (click)="goToCrew()">
     <h2>
@@ -46,7 +47,7 @@
       }"
       class="secondBackground"
     ></div>
-   
+
     <span id="city">{{ cityName }}</span>
   </div>
 </div>
@@ -92,17 +93,40 @@
   </div>
 </div>
 <div class="crew page" #crew>
-  <div class="crewSlider">
-    <ng-image-slider [images]="crewCollection" [imageSize]="{width: 400, height: 300, space: 10}"></ng-image-slider>
-  </div>
-  
+  <div class="crewContainer">
+    <h1>Meet our teem</h1>
+    <div class="crewSlider">
+      <ng-image-slider
+        [images]="crewCollection"
+        [imageSize]="{ width: 400, height: 300, space: 10 }"
+      ></ng-image-slider>
+    </div>
 
-  <mat-button-toggle-group name="crew" class='toggleButtonCrew' aria-label="crew" [(ngModel)]=crewToggle multiple (click)="choseCrew()">
-    <mat-button-toggle class="singleButton" value="Pilot">Pilots</mat-button-toggle>
-    <mat-button-toggle class="singleButton" value="Fly attendant">Fly attendants</mat-button-toggle>
-    <mat-button-toggle class="singleButton" value="Ground crew">Ground crew</mat-button-toggle>
-  </mat-button-toggle-group>
+    <mat-button-toggle-group
+      name="crew"
+      class="toggleButtonCrew"
+      aria-label="crew"
+      [(ngModel)]="crewToggle"
+      multiple
+      (click)="choseCrew()"
+    >
+      <mat-button-toggle class="singleButton" value="Pilot"
+        >Pilots</mat-button-toggle
+      >
+      <mat-button-toggle class="singleButton" value="Fly attendant"
+        >Fly attendants</mat-button-toggle
+      >
+      <mat-button-toggle class="singleButton" value="Ground crew"
+        >Ground crew</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
 </div>
 <div class="space page" #insidePlane>
-  
+  <p class="spaceDescription">The luxury you deserve</p>
+  <div class="planeGalery">
+    <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
+      <img src="assets/pictures/plane/{{i}}.jpg" alt="" />
+    </ng-container>
+  </div>
 </div>

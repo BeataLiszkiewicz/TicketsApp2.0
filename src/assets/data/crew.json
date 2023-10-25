@@ -14,11 +14,7 @@
         "position": "Pilot",
         "experience":"1 year"
       },
-      {
-        "name": "Anna",
-        "position": "Fly attendant",
-        "experience":"13 years"
-      },
+      
       {
         "name": "Asmee",
         "position": "Ground crew",
@@ -58,6 +54,11 @@
         "name": "Monica",
         "position": "Fly attendant",
         "experience":"9 years"
+      },
+      {
+        "name": "Paola",
+        "position": "Fly attendant",
+        "experience":"13 years"
       },
       {
         "name": "Piotr",

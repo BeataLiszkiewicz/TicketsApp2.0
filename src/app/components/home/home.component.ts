@@ -126,6 +126,9 @@ export class HomeComponent {
 
   choseCrew() {
     this.crewPosition = this.crewToggle;
+    if (this.crewPosition.length===0){
+      this.crewPosition=['Fly attendant', 'Ground crew', 'Pilot'];
+    }
     this.makeCrewCollection();
   }
 }
