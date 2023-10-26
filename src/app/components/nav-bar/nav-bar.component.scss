@@ -36,6 +36,13 @@
       button{
         transform: scaleY(1.5)
       }
+
+      .dontBook{
+        background-color: $background-primary;
+      }
+      .book{
+        background-color: $background-warn;
+      }
       
     }
     

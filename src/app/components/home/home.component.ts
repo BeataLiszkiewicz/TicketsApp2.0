@@ -3,6 +3,7 @@ import listOfCities from '../../../assets/data/allCities.json';
 import menu from '../../../assets/data/menu.json';
 import crew from '../../../assets/data/crew.json';
 import { Menu } from 'src/app/interfaces/menu';
+import { BookPlaneService } from 'src/app/services/book-plane.service';
 import {
   BehaviorSubject,
   Observable,
@@ -20,6 +21,7 @@ export class HomeComponent {
   cityList: any;
   cityName: string = 'Antalya';
   cityNumber: number = 1;
+  clickToBook: boolean = false;
   crewCollection!: Array<object>;
   crewToggle: any;
   cityPosition!: Number;
@@ -44,11 +46,19 @@ export class HomeComponent {
   @ViewChild('insidePlane', { static: true })
   insidePlane!: ElementRef;
 
+  constructor(private bookService:BookPlaneService){}
+
   ngOnInit() {
     this.changeCityBackground();
     this.cityList = listOfCities;
     this.planeMenu = menu;
     this.makeCrewCollection();
+    this.bookService.getHover().subscribe({
+      next: (el: any) => {
+        this.clickToBook = el;
+      },
+      error: (err: any) => console.log(err),
+    });
   }
 
   changeCityBackground() {
@@ -126,9 +136,23 @@ export class HomeComponent {
 
   choseCrew() {
     this.crewPosition = this.crewToggle;
-    if (this.crewPosition.length===0){
-      this.crewPosition=['Fly attendant', 'Ground crew', 'Pilot'];
+    if (this.crewPosition.length === 0) {
+      this.crewPosition = ['Fly attendant', 'Ground crew', 'Pilot'];
     }
     this.makeCrewCollection();
+  }
+
+  fly(direction: string) {
+    if (direction === 'on') {
+      this.clickToBook = true;
+      this.bookService.setHover(true)
+    } else {
+      this.clickToBook = false;
+      this.bookService.setHover(false)
+    }
+  }
+
+  bookPlane(){
+    
   }
 }

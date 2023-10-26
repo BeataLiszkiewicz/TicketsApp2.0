@@ -15,7 +15,7 @@
   </div>
   <div class="planeShadowContainer">
     <div class="planeShadow">
-      <div class="plane"></div>
+      <div [ngClass]="[!clickToBook?'plane':'flyingPlane']" (mouseover)="fly('on')" (mouseleave)="fly('off')" (click)="bookPlane()"></div>
     </div>
   </div>
   <div class="thirdPic" (click)="goToCrew()">
