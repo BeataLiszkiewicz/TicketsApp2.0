@@ -11,11 +11,35 @@ import {
   fromEvent,
   interval,
 } from 'rxjs';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('justFly', [
+      state('start', style({ rotate: '0deg' })),
+      state(
+        'fly',
+        style({
+          transform: 'translate(0vw, -270vh)',
+          scale: 0.5,
+          rotate: '-45deg',
+          transformOrigin: 'top left',
+        })
+      ),
+      transition('*=>start', animate('800ms')),
+      transition('start=>fly', animate('3000ms')),
+    ]),
+  ],
 })
 export class HomeComponent {
   cityList: any;
@@ -26,6 +50,7 @@ export class HomeComponent {
   crewToggle: any;
   cityPosition!: Number;
   crewPosition: Array<string> = ['Fly attendant', 'Ground crew', 'Pilot'];
+  flyStart: string = '';
   interval: any;
   intervalWorks: boolean = false;
   intervalSubscription: Subscription = new Subscription();
@@ -46,7 +71,7 @@ export class HomeComponent {
   @ViewChild('insidePlane', { static: true })
   insidePlane!: ElementRef;
 
-  constructor(private bookService:BookPlaneService){}
+  constructor(private bookService: BookPlaneService, private router: Router) {}
 
   ngOnInit() {
     this.changeCityBackground();
@@ -59,6 +84,19 @@ export class HomeComponent {
       },
       error: (err: any) => console.log(err),
     });
+
+    this.bookService.getFlying().subscribe({
+      next: (el: any) => {
+        if(el==='start'){
+          this.bookPlane();
+        }
+      },
+      error: (err: any) => console.log(err),
+    });
+  }
+
+  ngOnDestroy(){
+    this.bookService.setBookingButton(true)
   }
 
   changeCityBackground() {
@@ -145,14 +183,21 @@ export class HomeComponent {
   fly(direction: string) {
     if (direction === 'on') {
       this.clickToBook = true;
-      this.bookService.setHover(true)
+      this.bookService.setHover(true);
     } else {
       this.clickToBook = false;
-      this.bookService.setHover(false)
+      this.bookService.setHover(false);
     }
   }
 
-  bookPlane(){
-    
+  bookPlane() {
+    this.flyStart = 'start';
+    this.clickToBook = true;
+    setTimeout(() => {
+      this.flyStart = 'fly';
+    }, 800);
+    setTimeout(() => {
+      this.router.navigate(['/flyChoice']);
+    }, 2200);
   }
 }

@@ -178,6 +178,7 @@ h2 {
       .flyingPlane {
         @include plane();
        background-color: $background-warn;
+       
       }
     }
   }

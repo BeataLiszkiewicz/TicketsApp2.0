@@ -15,7 +15,13 @@
   </div>
   <div class="planeShadowContainer">
     <div class="planeShadow">
-      <div [ngClass]="[!clickToBook?'plane':'flyingPlane']" (mouseover)="fly('on')" (mouseleave)="fly('off')" (click)="bookPlane()"></div>
+      <div
+        [ngClass]="[!clickToBook ? 'plane' : 'flyingPlane']"
+        (mouseover)="fly('on')"
+        (mouseleave)="fly('off')"
+        (click)="bookPlane()"
+        [@justFly]="flyStart"
+      ></div>
     </div>
   </div>
   <div class="thirdPic" (click)="goToCrew()">
@@ -127,7 +133,7 @@
   <p class="spaceDescription">The luxury you deserve</p>
   <div class="planeGalery">
     <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
-      <img src="assets/pictures/plane/{{i}}.jpg" alt="" />
+      <img src="assets/pictures/plane/{{ i }}.jpg" alt="" />
     </ng-container>
   </div>
 </div>

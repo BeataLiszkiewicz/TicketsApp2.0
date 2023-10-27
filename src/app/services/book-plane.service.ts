@@ -7,8 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class BookPlaneService {
 
   constructor() { }
-
+  bookPlane=new BehaviorSubject<string>('');
+  letPlaneBooking=new BehaviorSubject<boolean>(false);
   mouseoverBooking = new BehaviorSubject<string>('');
+  
 
   getHover() {
     return this.mouseoverBooking.asObservable();
@@ -16,5 +18,22 @@ export class BookPlaneService {
 
   setHover(el: any) {
     this.mouseoverBooking.next(el);
+  }
+
+  getFlying(){
+    return this.bookPlane.asObservable();
+  }
+
+  setFlying(fly:string){
+    this.bookPlane.next(fly)
+  }
+
+  getBookingButton(){
+    return this.letPlaneBooking.asObservable();
+  }
+
+  setBookingButton(el:boolean){
+    this.letPlaneBooking.next(el);
+    
   }
 }
