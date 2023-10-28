@@ -10,10 +10,13 @@ import { ALLAirports } from 'src/app/interfaces/allairports';
   styleUrls: ['./fly-choice.component.scss'],
 })
 export class FlyChoiceComponent {
-  allAirports!: ALLAirports[];
+  airportsList:Array<string>=[];
+  allAirportsArray!: ALLAirports[];
   allDepartureAirports: number = 0;
+  arrival:string='';
   availableArrivals: string[] = [];
   availableDepartures: string[] = [];
+  departure:string='';
 
   constructor(
     private bookService: BookPlaneService,
@@ -21,21 +24,25 @@ export class FlyChoiceComponent {
   ) {}
   ngOnInit() {
     this.bookService.setBookingButton(true);
-    this.allAirports = Airports;
+    this.allAirportsArray = Airports;
     this.setAirports();
+    this.airportsList = [
+      ...this.availableArrivals,
+      ...this.availableDepartures,
+    ];
+  
   }
 
   setAirports() {
-    for (let i = 0; i < this.allAirports.length; i++) {
-      this.availableDepartures.push(this.allAirports[i].departureAirport);
-      console.log(this.allAirports[i].departureAirport);
-      for (let j = 0; j < this.allAirports[i].arrivalAirports.length; j++) {
+    for (let i = 0; i < this.allAirportsArray.length; i++) {
+      this.availableDepartures.push(this.allAirportsArray[i].departureAirport);
+      for (let j = 0; j < this.allAirportsArray[i].arrivalAirports.length; j++) {
         if (
           !this.availableArrivals.includes(
-            this.allAirports[i].arrivalAirports[j]
+            this.allAirportsArray[i].arrivalAirports[j]
           )
         ) {
-          this.availableArrivals.push(this.allAirports[i].arrivalAirports[j]);
+          this.availableArrivals.push(this.allAirportsArray[i].arrivalAirports[j]);
         }
       }
       this.sort(this.availableArrivals);
@@ -46,5 +53,9 @@ export class FlyChoiceComponent {
 
   sort(param: Array<string>) {
     param.sort();
+  }
+
+  filterAvailableAirports(direction:string, chosedAirport:string){
+    
   }
 }

@@ -1,13 +1,41 @@
 <div class="flyChoicePage">
-    <div class="weather"></div>
-    <div class="flyOptions">
-        <form #flyForm="ngForm" class="flyForm">
-            <div class="departure">
-                <label for=""></label>
-            </div>
-            <div class="arrival"></div>
-            <div class="calendar"></div>
-            <div class="passengers"></div>
-        </form>
-    </div>
+  <div class="weather"></div>
+  <div class="flyOptions">
+    <form #flyForm="ngForm" class="flyForm">
+      <div class="departure">
+        <label for="departure">Departure airport</label>
+        <select
+          name="departure"
+          ngModel
+          #departure="ngModel"
+          required
+          (change)="filterAvailableAirports('departure', departure.value)"
+        >
+          <option style="display: none"></option>
+          <option *ngFor="let fly of availableDepartures" [value]="fly">
+            {{ fly }}
+          </option>
+        
+        </select>
+      </div>
+      <div class="arrival">
+        <label for="arrival">Arrival airport</label>
+        <select
+          name="arrival"
+          ngModel
+          #arrival="ngModel"
+          required
+          (change)="filterAvailableAirports('arrival', arrival.value)"
+        >
+          <option style="display: none"></option>
+          <option *ngFor="let fly of availableArrivals" [value]="fly">
+            {{ fly }}
+          </option>
+        
+        </select>
+      </div>
+      <div class="calendar"></div>
+      <div class="passengers"></div>
+    </form>
+  </div>
 </div>
