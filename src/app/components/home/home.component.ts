@@ -74,6 +74,7 @@ export class HomeComponent {
   constructor(private bookService: BookPlaneService, private router: Router) {}
 
   ngOnInit() {
+    this.bookService.setBookingButton(false)
     this.changeCityBackground();
     this.cityList = listOfCities;
     this.planeMenu = menu;
