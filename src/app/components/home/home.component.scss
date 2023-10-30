@@ -192,9 +192,11 @@ h2 {
 .destinationBackground {
   background-color: $background-primary;
   height: 90vh;
+  
 
   .destinations {
     height: 90vh;
+    width: 98vw;
     color: white;
     font-size: 10vmax;
     position: relative;

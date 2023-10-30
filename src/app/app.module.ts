@@ -5,7 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -13,7 +13,9 @@ import { HoverOpacityDirective } from './directives/hover-opacity.directive';
 import { NgImageSliderModule } from 'ng-image-slider';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FlyChoiceComponent } from './components/fly-choice/fly-choice.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 
@@ -23,7 +25,8 @@ import { FlyChoiceComponent } from './components/fly-choice/fly-choice.component
     NavBarComponent,
     HomeComponent,
     HoverOpacityDirective,
-    FlyChoiceComponent
+    FlyChoiceComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule, 
@@ -35,7 +38,9 @@ import { FlyChoiceComponent } from './components/fly-choice/fly-choice.component
     AppRoutingModule,
     NgImageSliderModule,
     MatSliderModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatProgressSpinnerModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

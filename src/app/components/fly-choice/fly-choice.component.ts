@@ -3,6 +3,8 @@ import { BookPlaneService } from 'src/app/services/book-plane.service';
 import { FormBuilder } from '@angular/forms';
 import Airports from '../../../assets/data/departureAirports.json';
 import { ALLAirports } from 'src/app/interfaces/allairports';
+import coordinates from './../../../assets/data/cityCoordinates.json';
+import { WeatherApiService } from 'src/app/services/weather-api.service';
 
 @Component({
   selector: 'app-fly-choice',
@@ -16,12 +18,18 @@ export class FlyChoiceComponent {
   arrival:string='';
   availableArrivals: string[]= [];
   availableDepartures: string[] = [];
+  coordinatesArrival:any;
+  coordinatesDeparture:any;
+  dailyWeatherForecastArrival: any = [];
+  dailyWeatherForecastDeparture: any = [];
   departure:string='';
   oneAirport!:ALLAirports|undefined;
+  weatherPlace: string = '';
 
   constructor(
     private bookService: BookPlaneService,
-    private readonly form: FormBuilder
+    private readonly form: FormBuilder,
+    private weatherService: WeatherApiService
   ) {}
   ngOnInit() {
     this.bookService.setBookingButton(true);
@@ -61,7 +69,7 @@ export class FlyChoiceComponent {
       
       if (chosedAirport !== '' && this.departure !== chosedAirport) {
         
-        // this.dailyWeatherForecast = [];
+        this.dailyWeatherForecastDeparture = [];
         this.oneAirport = this.allAirportsArray.find(
           (el: any) => el.departureAirport === chosedAirport
         );
@@ -75,36 +83,36 @@ export class FlyChoiceComponent {
         // this.flyChoiceService.setDeparture(this.departure);
   
         // get coordinates of departure airport
-        // this.city = coordinates.filter((item) => item.airport === this.departure);
-        // this.weatherService.weather(this.city).subscribe({
-        //   next: (data: any) => {
-        //     this.dailyWeatherForecast.push({
-        //       day: new Date(data.list[0].dt_txt).getDate(),
-        //       date: new Date(data.list[0].dt_txt),
-        //       temp: Math.round(data.list[0].main.feels_like),
-        //       weather: data.list[0].weather[0].main,
-        //     });
-        //     for (let i = 1; i < data.list.length; i++) {
-        //       if (
-        //         new Date(data.list[i].dt_txt).getDate() !==
-        //         this.dailyWeatherForecast[this.dailyWeatherForecast.length - 1]
-        //           .day
-        //       ) {
-        //         this.dailyWeatherForecast.push({
-        //           day: new Date(data.list[i].dt_txt).getDate(),
-        //           date: new Date(data.list[i].dt_txt),
-        //           temp: Math.round(data.list[i].main.feels_like),
-        //           weather: data.list[i].weather[0].main,
-        //         });
-        //       }
-        //     }
-        //   },
-        //   error: (err: any) => console.error(err),
-        // });
+        this.coordinatesDeparture = coordinates.filter((item) => item.airport === this.departure);
+        this.weatherService.weather(this.coordinatesDeparture).subscribe({
+          next: (data: any) => {
+            this.dailyWeatherForecastDeparture.push({
+              day: new Date(data.list[0].dt_txt).getDate(),
+              date: new Date(data.list[0].dt_txt),
+              temp: Math.round(data.list[0].main.feels_like),
+              weather: data.list[0].weather[0].main,
+            });
+            for (let i = 1; i < data.list.length; i++) {
+              if (
+                new Date(data.list[i].dt_txt).getDate() !==
+                this.dailyWeatherForecastDeparture[this.dailyWeatherForecastDeparture.length - 1]
+                  .day
+              ) {
+                this.dailyWeatherForecastDeparture.push({
+                  day: new Date(data.list[i].dt_txt).getDate(),
+                  date: new Date(data.list[i].dt_txt),
+                  temp: Math.round(data.list[i].main.feels_like),
+                  weather: data.list[i].weather[0].main,
+                });
+              }
+            }
+          },
+          error: (err: any) => console.error(err),
+        });
         // this.choiceOfWeatherPlace();
-        // if (this.arrival===''||this.weatherPlace!==this.arrival){
-        //   this.weatherPlace=param;
-        // }
+        if (this.arrival===''||this.weatherPlace!==this.arrival){
+          this.weatherPlace=chosedAirport;
+        }
         
       }
     }else if(direction==='arrival'){
@@ -168,4 +176,11 @@ export class FlyChoiceComponent {
 
     }
   }
+
+  // choiceOfWeatherPlace() {
+  //   this.weatherPlaceChoice = this.airportsList.filter(
+  //     (el: string) => el === this.departure || el === this.arrival
+  //   );
+  //   this.weatherPlaceChoice.unshift('Weather forecast');
+  // }
 }
