@@ -274,11 +274,13 @@ h2 {
   }
   .mat-button-toggle-appearance-standard {
     margin-top: 2rem;
-    background-color: $background-neutral-light;
+    background-color: $background-neutral;
+    color: $background-primary;
   }
 
   .mat-button-toggle-checked {
     background-color: $background-warn;
+    color: $background-neutral;
   }
 
   .toggleButtonCrew {

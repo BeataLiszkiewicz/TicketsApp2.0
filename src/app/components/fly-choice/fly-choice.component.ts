@@ -3,6 +3,7 @@ import { BookPlaneService } from 'src/app/services/book-plane.service';
 import { FormBuilder } from '@angular/forms';
 import Airports from '../../../assets/data/departureAirports.json';
 import { ALLAirports } from 'src/app/interfaces/allairports';
+import { CityCoordinates } from 'src/app/interfaces/city-coordinates';
 import coordinates from './../../../assets/data/cityCoordinates.json';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 
@@ -12,19 +13,19 @@ import { WeatherApiService } from 'src/app/services/weather-api.service';
   styleUrls: ['./fly-choice.component.scss'],
 })
 export class FlyChoiceComponent {
-  airportsList:Array<string>=[];
+  airportsList: Array<string> = [];
   allAirportsArray!: ALLAirports[];
   allDepartureAirports: number = 0;
-  arrival:string='';
-  availableArrivals: string[]= [];
+  arrival: string = '';
+  availableArrivals: string[] = [];
   availableDepartures: string[] = [];
-  coordinatesArrival:any;
-  coordinatesDeparture:any;
-  dailyWeatherForecastArrival: any = [];
-  dailyWeatherForecastDeparture: any = [];
-  departure:string='';
-  oneAirport!:ALLAirports|undefined;
+  dailyWeatherForecast: any = [];
+  // dailyWeatherForecastDeparture: any = [];
+  departure: string = '';
+  oneAirport!: ALLAirports | undefined;
   weatherPlace: string = '';
+  weatherPlaceBefore:string='';
+  weatherPlaceCoordinates:CityCoordinates[]=[];
 
   constructor(
     private bookService: BookPlaneService,
@@ -39,19 +40,24 @@ export class FlyChoiceComponent {
       ...this.availableArrivals,
       ...this.availableDepartures,
     ];
-  
   }
 
   setAirports() {
     for (let i = 0; i < this.allAirportsArray.length; i++) {
       this.availableDepartures.push(this.allAirportsArray[i].departureAirport);
-      for (let j = 0; j < this.allAirportsArray[i].arrivalAirports.length; j++) {
+      for (
+        let j = 0;
+        j < this.allAirportsArray[i].arrivalAirports.length;
+        j++
+      ) {
         if (
           !this.availableArrivals.includes(
             this.allAirportsArray[i].arrivalAirports[j]
           )
         ) {
-          this.availableArrivals.push(this.allAirportsArray[i].arrivalAirports[j]);
+          this.availableArrivals.push(
+            this.allAirportsArray[i].arrivalAirports[j]
+          );
         }
       }
       this.sort(this.availableArrivals);
@@ -64,123 +70,93 @@ export class FlyChoiceComponent {
     param.sort();
   }
 
-  filterAvailableAirports(direction:string, chosedAirport:string){
-    if(direction==='departure'){
-      
-      if (chosedAirport !== '' && this.departure !== chosedAirport) {
-        
-        this.dailyWeatherForecastDeparture = [];
-        this.oneAirport = this.allAirportsArray.find(
-          (el: any) => el.departureAirport === chosedAirport
-        );
-
-        if(this.oneAirport!==undefined){
-          this.availableArrivals = this.oneAirport.arrivalAirports;
-        }
-        
-  
-        this.departure = chosedAirport;
-        // this.flyChoiceService.setDeparture(this.departure);
-  
-        // get coordinates of departure airport
-        this.coordinatesDeparture = coordinates.filter((item) => item.airport === this.departure);
-        this.weatherService.weather(this.coordinatesDeparture).subscribe({
-          next: (data: any) => {
-            this.dailyWeatherForecastDeparture.push({
-              day: new Date(data.list[0].dt_txt).getDate(),
-              date: new Date(data.list[0].dt_txt),
-              temp: Math.round(data.list[0].main.feels_like),
-              weather: data.list[0].weather[0].main,
-            });
-            for (let i = 1; i < data.list.length; i++) {
-              if (
-                new Date(data.list[i].dt_txt).getDate() !==
-                this.dailyWeatherForecastDeparture[this.dailyWeatherForecastDeparture.length - 1]
-                  .day
-              ) {
-                this.dailyWeatherForecastDeparture.push({
-                  day: new Date(data.list[i].dt_txt).getDate(),
-                  date: new Date(data.list[i].dt_txt),
-                  temp: Math.round(data.list[i].main.feels_like),
-                  weather: data.list[i].weather[0].main,
-                });
-              }
-            }
-          },
-          error: (err: any) => console.error(err),
-        });
-        // this.choiceOfWeatherPlace();
-        if (this.arrival===''||this.weatherPlace!==this.arrival){
-          this.weatherPlace=chosedAirport;
-        }
-        
-      }
-    }else if(direction==='arrival'){
-      // this.dailyWeatherForecastArrival = [];
+  filterAvailableAirports(direction: string, chosedAirport: string) {
     if (chosedAirport !== '') {
-      if (this.departure !== '') {
-        this.availableDepartures = [this.departure];
-      } else {
-        this.availableDepartures = [];
-        
-      }
-      for (let i = 0; i < this.allDepartureAirports; i++) {
-        if (
-          this.allAirportsArray[i].arrivalAirports.includes(chosedAirport) &&
-          !this.availableDepartures.includes(
-            this.allAirportsArray[i].departureAirport
-          )
-        ) {
-          this.availableDepartures.push(this.allAirportsArray[i].departureAirport);
+      if (direction === 'departure') {
+        if (chosedAirport !== this.departure) {
+          this.oneAirport = this.allAirportsArray.find(
+            (el: ALLAirports) => el.departureAirport === chosedAirport
+          );
+
+          if (this.oneAirport) {
+            this.availableArrivals = this.oneAirport.arrivalAirports;
+          }
+
+          if (this.weatherPlace === this.departure) {
+            this.weatherPlace = chosedAirport;
+          }
+
+          this.departure = chosedAirport;
+          // this.flyChoiceService.setDeparture(this.departure);
         }
+      } else if (direction === 'arrival') {
+        if (this.departure !== '') {
+          this.availableDepartures = [this.departure];
+        } else {
+          this.availableDepartures = [];
+        }
+        for (let i = 0; i < this.allDepartureAirports; i++) {
+          if (
+            this.allAirportsArray[i].arrivalAirports.includes(chosedAirport) &&
+            !this.availableDepartures.includes(
+              this.allAirportsArray[i].departureAirport
+            )
+          ) {
+            this.availableDepartures.push(
+              this.allAirportsArray[i].departureAirport
+            );
+          }
+        }
+
+        if (this.weatherPlace === this.arrival) {
+          this.weatherPlace = chosedAirport;
+        }
+
+        this.arrival = chosedAirport;
+        // this.flyChoiceService.setArrival(this.arrival);
       }
-      this.arrival = chosedAirport;
-      // this.flyChoiceService.setArrival(this.arrival);
-
-      // this.cityArrival = coordinates.filter(
-      //   (item) => item.airport === this.arrival
-      // );
-      // this.weatherService.weather(this.cityArrival).subscribe({
-      //   next: (data: any) => {
-      //     this.dailyWeatherForecastArrival.push({
-      //       day: new Date(data.list[0].dt_txt).getDate(),
-      //       date: new Date(data.list[0].dt_txt),
-      //       temp: Math.round(data.list[0].main.feels_like),
-      //       weather: data.list[0].weather[0].main,
-      //     });
-
-      //     for (let i = 1; i < data.list.length; i++) {
-      //       if (
-      //         new Date(data.list[i].dt_txt).getDate() !==
-      //         this.dailyWeatherForecastArrival[
-      //           this.dailyWeatherForecastArrival.length - 1
-      //         ].day
-      //       ) {
-      //         this.dailyWeatherForecastArrival.push({
-      //           day: new Date(data.list[i].dt_txt).getDate(),
-      //           date: new Date(data.list[i].dt_txt),
-      //           temp: Math.round(data.list[i].main.feels_like),
-      //           weather: data.list[i].weather[0].main,
-      //         });
-      //       }
-      //     }
-      //   },
-      //   error: (err: any) => console.error(err),
-      // });
-      // this.choiceOfWeatherPlace();
     }
-    
-    // if (this.departure===''||this.weatherPlace!==this.departure){
-    //   this.weatherPlace=param;
-    // }
 
+    if(this.weatherPlace===''||this.weatherPlace!==this.weatherPlaceBefore){
+      this.changeWeather(chosedAirport)
     }
   }
 
-  // choiceOfWeatherPlace() {
-  //   this.weatherPlaceChoice = this.airportsList.filter(
-  //     (el: string) => el === this.departure || el === this.arrival
-  //   );
-  //   this.weatherPlaceChoice.unshift('Weather forecast');
-  // }
+  changeWeather(city:string){
+    
+    if (city!==this.weatherPlaceBefore){
+      this.dailyWeatherForecast=[];
+      this.weatherPlaceCoordinates = coordinates.filter(
+        (item:CityCoordinates) => item.airport === city
+      );
+      this.weatherService.weather(this.weatherPlaceCoordinates).subscribe({
+        next: (data: any) => {
+          this.dailyWeatherForecast.push({
+            day: new Date(data.list[0].dt_txt).getDate(),
+            date: new Date(data.list[0].dt_txt),
+            temp: Math.round(data.list[0].main.feels_like),
+            weather: data.list[0].weather[0].main,
+          });
+
+          for (let i = 1; i < data.list.length; i++) {
+            if (
+              new Date(data.list[i].dt_txt).getDate() !==
+              this.dailyWeatherForecast[
+                this.dailyWeatherForecast.length - 1
+              ].day
+            ) {
+              this.dailyWeatherForecast.push({
+                day: new Date(data.list[i].dt_txt).getDate(),
+                date: new Date(data.list[i].dt_txt),
+                temp: Math.round(data.list[i].main.feels_like),
+                weather: data.list[i].weather[0].main,
+              });
+            }
+          }
+        },
+        error: (err: any) => console.error(err),
+      });
+    }
+    this.weatherPlaceBefore=city;
+  }
 }

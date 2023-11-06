@@ -1,13 +1,14 @@
 <div class="flyChoicePage">
   <div class="weather" *ngIf="departure.value !== '' || arrival.value !== ''">
-    <div class="option">
+    <div class="choseWeather">
         <select
-          name="place"
-          #place
+          name="placeOfWeather"
+          #placeOfWeather
           [(ngModel)]="weatherPlace"
           [style.boxShadow]="
             weatherPlace === '' ? '10px 10px 20px #00adfb' : 'none'
           "
+          (click)="changeWeather(weatherPlace)"
         >
           <option *ngIf="departure.value !== ''" value="{{ departure.value }}">
             {{ departure.value }}
@@ -19,8 +20,8 @@
       </div>
       <app-spinner></app-spinner>
       <div class="weatherForecast">
-        <ng-container *ngIf="weatherPlace === departure.value; else arrivalPlace">
-          <ng-container *ngFor="let day of dailyWeatherForecastDeparture">
+        
+          <ng-container *ngFor="let day of dailyWeatherForecast">
             <div class="weatherDay">
               <p class="date">{{ day.date | date : "dd.MM" }}</p>
               <img
@@ -31,21 +32,6 @@
               <p class="temperature">{{ day.temp }}<span>&#8451;</span></p>
             </div>
           </ng-container>
-        </ng-container>
-        <ng-template #arrivalPlace>
-          <ng-container *ngIf="weatherPlace === arrival.value">
-            <ng-container *ngFor="let day of dailyWeatherForecastArrival">
-              <div class="weatherDay">
-                <p class="date">{{ day.date | date : "dd.MM" }}</p>
-                <img
-                  src="{{ 'assets/pictures/weatherIcons/' + day.weather + '.png' }}"
-                  alt="{{ day.weather }}"
-                />
-                <p class="temperature">{{ day.temp }}<span>&#8451;</span></p>
-              </div>
-            </ng-container>
-          </ng-container>
-        </ng-template>
       </div>
 
   </div>
