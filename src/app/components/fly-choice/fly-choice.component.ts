@@ -6,6 +6,7 @@ import { ALLAirports } from 'src/app/interfaces/allairports';
 import { CityCoordinates } from 'src/app/interfaces/city-coordinates';
 import coordinates from './../../../assets/data/cityCoordinates.json';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
+import { FromFlyChoiceService } from 'src/app/services/from-fly-choice.service';
 
 @Component({
   selector: 'app-fly-choice',
@@ -20,7 +21,6 @@ export class FlyChoiceComponent {
   availableArrivals: string[] = [];
   availableDepartures: string[] = [];
   dailyWeatherForecast: any = [];
-  // dailyWeatherForecastDeparture: any = [];
   departure: string = '';
   oneAirport!: ALLAirports | undefined;
   weatherPlace: string = '';
@@ -30,7 +30,8 @@ export class FlyChoiceComponent {
   constructor(
     private bookService: BookPlaneService,
     private readonly form: FormBuilder,
-    private weatherService: WeatherApiService
+    private weatherService: WeatherApiService,
+    private forDataService:FromFlyChoiceService
   ) {}
   ngOnInit() {
     this.bookService.setBookingButton(true);
@@ -87,7 +88,8 @@ export class FlyChoiceComponent {
           }
 
           this.departure = chosedAirport;
-          // this.flyChoiceService.setDeparture(this.departure);
+          this.forDataService.setDeparture(this.departure)
+
         }
       } else if (direction === 'arrival') {
         if (this.departure !== '') {
@@ -113,7 +115,7 @@ export class FlyChoiceComponent {
         }
 
         this.arrival = chosedAirport;
-        // this.flyChoiceService.setArrival(this.arrival);
+        this.forDataService.setArrival(this.arrival)
       }
     }
 

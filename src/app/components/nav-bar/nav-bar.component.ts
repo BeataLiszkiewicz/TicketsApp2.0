@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookPlaneService } from 'src/app/services/book-plane.service';
+import { TicketPriceService } from 'src/app/services/ticket-price.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +11,8 @@ export class NavBarComponent {
   bookingUnavailable: boolean = false;
   clickToBook: boolean = false;
 
-  constructor(private bookService: BookPlaneService) {}
+  constructor(private bookService: BookPlaneService,
+    private ticketService:TicketPriceService) {}
 
   ngOnInit() {
     this.bookService.getHover().subscribe({
@@ -25,6 +27,8 @@ export class NavBarComponent {
       },
       error: (err: any) => console.log(err),
     });
+
+    this.ticketService.createPriceList();
   }
 
   fly(direction: string) {

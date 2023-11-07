@@ -16,6 +16,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FlyChoiceComponent } from './components/fly-choice/fly-choice.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { DeparturesCalendarComponent } from './components/departures-calendar/departures-calendar.component';
 
 
 
@@ -26,7 +27,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     HomeComponent,
     HoverOpacityDirective,
     FlyChoiceComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DeparturesCalendarComponent
   ],
   imports: [
     BrowserModule, 
