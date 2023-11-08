@@ -98,6 +98,8 @@ export class HomeComponent {
 
   ngOnDestroy(){
     this.bookService.setBookingButton(true)
+    this.flyStart='';
+    this.clickToBook = false;
   }
 
   changeCityBackground() {

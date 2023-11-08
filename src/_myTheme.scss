@@ -102,7 +102,7 @@ $fireengine-red-palette: (
 
 $bluesky-primary: mat.define-palette($bright-maya-blue-palette, 50);
 $bluesky-accent: mat.define-palette($prussian-blue-palette, A700);
-$bluesky-warn: mat.define-palette($fireengine-red-palette, 800);
+$bluesky-warn: mat.define-palette($fireengine-red-palette, A700);
 $my-typography: mat.define-typography-config();
 
 $background-neutral: map-get($prussian-blue-palette, 900);

@@ -7,6 +7,9 @@ import { CityCoordinates } from 'src/app/interfaces/city-coordinates';
 import coordinates from './../../../assets/data/cityCoordinates.json';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 import { FromFlyChoiceService } from 'src/app/services/from-fly-choice.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeparturesCalendarComponent } from '../departures-calendar/departures-calendar.component';
+import { DataFromCalendarService } from 'src/app/services/data-from-calendar.service';
 
 @Component({
   selector: 'app-fly-choice',
@@ -21,17 +24,20 @@ export class FlyChoiceComponent {
   availableArrivals: string[] = [];
   availableDepartures: string[] = [];
   dailyWeatherForecast: any = [];
+  dataFromCalendar: any;
   departure: string = '';
   oneAirport!: ALLAirports | undefined;
   weatherPlace: string = '';
-  weatherPlaceBefore:string='';
-  weatherPlaceCoordinates:CityCoordinates[]=[];
+  weatherPlaceBefore: string = '';
+  weatherPlaceCoordinates: CityCoordinates[] = [];
 
   constructor(
     private bookService: BookPlaneService,
     private readonly form: FormBuilder,
     private weatherService: WeatherApiService,
-    private forDataService:FromFlyChoiceService
+    private forDataService: FromFlyChoiceService,
+    private dialogRef: MatDialog,
+    private fromCalendarService: DataFromCalendarService
   ) {}
   ngOnInit() {
     this.bookService.setBookingButton(true);
@@ -64,6 +70,15 @@ export class FlyChoiceComponent {
       this.sort(this.availableArrivals);
       this.sort(this.availableDepartures);
       this.allDepartureAirports = this.availableDepartures.length;
+      this.fromCalendarService.getData().subscribe({
+        next: (el: any) => {
+          this.dataFromCalendar = el;
+          if (el !== '') {
+            // this.disable = true;
+          }
+        },
+        error: (err: any) => console.log(err),
+      });
     }
   }
 
@@ -88,8 +103,7 @@ export class FlyChoiceComponent {
           }
 
           this.departure = chosedAirport;
-          this.forDataService.setDeparture(this.departure)
-
+          this.forDataService.setDeparture(this.departure);
         }
       } else if (direction === 'arrival') {
         if (this.departure !== '') {
@@ -115,21 +129,23 @@ export class FlyChoiceComponent {
         }
 
         this.arrival = chosedAirport;
-        this.forDataService.setArrival(this.arrival)
+        this.forDataService.setArrival(this.arrival);
       }
     }
 
-    if(this.weatherPlace===''||this.weatherPlace!==this.weatherPlaceBefore){
-      this.changeWeather(chosedAirport)
+    if (
+      this.weatherPlace === '' ||
+      this.weatherPlace !== this.weatherPlaceBefore
+    ) {
+      this.changeWeather(chosedAirport);
     }
   }
 
-  changeWeather(city:string){
-    
-    if (city!==this.weatherPlaceBefore){
-      this.dailyWeatherForecast=[];
+  changeWeather(city: string) {
+    if (city !== this.weatherPlaceBefore) {
+      this.dailyWeatherForecast = [];
       this.weatherPlaceCoordinates = coordinates.filter(
-        (item:CityCoordinates) => item.airport === city
+        (item: CityCoordinates) => item.airport === city
       );
       this.weatherService.weather(this.weatherPlaceCoordinates).subscribe({
         next: (data: any) => {
@@ -143,9 +159,8 @@ export class FlyChoiceComponent {
           for (let i = 1; i < data.list.length; i++) {
             if (
               new Date(data.list[i].dt_txt).getDate() !==
-              this.dailyWeatherForecast[
-                this.dailyWeatherForecast.length - 1
-              ].day
+              this.dailyWeatherForecast[this.dailyWeatherForecast.length - 1]
+                .day
             ) {
               this.dailyWeatherForecast.push({
                 day: new Date(data.list[i].dt_txt).getDate(),
@@ -159,6 +174,22 @@ export class FlyChoiceComponent {
         error: (err: any) => console.error(err),
       });
     }
-    this.weatherPlaceBefore=city;
+    this.weatherPlaceBefore = city;
+  }
+
+  openCalendar() {
+    this.dialogRef.open(DeparturesCalendarComponent, {
+      disableClose: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      backdropClass: '',
+      maxWidth:'100vw',
+      position: {
+        top: '',
+        bottom: '',
+        left: '',
+        right: '',
+      },
+    });
   }
 }

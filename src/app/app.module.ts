@@ -17,6 +17,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FlyChoiceComponent } from './components/fly-choice/fly-choice.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { DeparturesCalendarComponent } from './components/departures-calendar/departures-calendar.component';
+import { CalendarCurrencyPipe } from './pipes/calendar-currency.pipe';
+import { MonthNamePipe } from './pipes/month-name.pipe';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ApiInterceptor } from './interceptors/api.interceptor';
 
 
 
@@ -28,7 +32,9 @@ import { DeparturesCalendarComponent } from './components/departures-calendar/de
     HoverOpacityDirective,
     FlyChoiceComponent,
     SpinnerComponent,
-    DeparturesCalendarComponent
+    DeparturesCalendarComponent,
+    CalendarCurrencyPipe,
+    MonthNamePipe
   ],
   imports: [
     BrowserModule, 
@@ -42,9 +48,18 @@ import { DeparturesCalendarComponent } from './components/departures-calendar/de
     MatSliderModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [{
+    provide: MatDialogRef,
+    useValue: {},
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ApiInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

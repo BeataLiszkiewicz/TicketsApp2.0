@@ -18,9 +18,9 @@
           </option>
         </select>
       </div>
-      <app-spinner></app-spinner>
+      
       <div class="weatherForecast">
-        
+        <app-spinner></app-spinner>
           <ng-container *ngFor="let day of dailyWeatherForecast">
             <div class="weatherDay">
               <p class="date">{{ day.date | date : "dd.MM" }}</p>
@@ -69,7 +69,19 @@
         
         </select>
       </div>
-      <div class="calendar"></div>
+      <div class="calendar">
+        <ng-container *ngIf="departure.value !== '' && arrival.value !== ''">
+            <label for="departureDay">Departure day:</label>
+            <input
+              required
+              type="date"
+              #date
+              (click)="openCalendar()"
+              [ngModel]="dataFromCalendar.departureDate | date : 'yyyy-MM-dd'"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </ng-container>
+      </div>
       <div class="passengers"></div>
     </form>
   </div>
