@@ -51,6 +51,8 @@ export class DeparturesCalendarComponent {
 
     this.priceList = this.priceService.ticketsPriceList;
     this.createDataForCalendar();
+
+    console.log(this.calendar)
   }
 
   getDepartureAndArrival() {
