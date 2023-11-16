@@ -82,7 +82,17 @@
             />
           </ng-container>
       </div>
-      <div class="passengers"></div>
+      <div class="passengers">
+        <ng-container *ngIf="departure.value !== '' && arrival.value !== ''">
+          <label for="passenger">Number of passengers:</label>
+          <input
+            required
+            (click)="openPassengerChoice()"
+            [ngModel]="passengersNumber"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </ng-container>
+      </div>
     </form>
   </div>
 </div>

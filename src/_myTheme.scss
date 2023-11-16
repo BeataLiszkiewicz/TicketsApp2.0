@@ -100,6 +100,8 @@ $fireengine-red-palette: (
   ),
 );
 
+
+
 $bluesky-primary: mat.define-palette($bright-maya-blue-palette, 50);
 $bluesky-accent: mat.define-palette($prussian-blue-palette, A700);
 $bluesky-warn: mat.define-palette($fireengine-red-palette, A700);
@@ -109,7 +111,7 @@ $background-neutral: map-get($prussian-blue-palette, 900);
 $background-neutral-light:map-get($prussian-blue-palette, 300);
 $background-primary: map-get($bright-maya-blue-palette, 50);
 $background-warn:map-get($bluesky-warn, A700);
-
+$background-warning:map-get($bluesky-warn, 900);
 
 
 $bluesky-theme: mat.define-light-theme(
@@ -124,3 +126,22 @@ $bluesky-theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($bluesky-theme);
+
+@mixin button{
+  
+  border-radius: 15px;
+}
+
+@mixin buttonStandard{
+  @include button();
+  background-color:$background-neutral-light;
+  color:$background-neutral;
+}
+
+@mixin buttonHover{
+  @include button();
+  background-color: $background-warn;
+  color:$background-primary;
+}
+
+

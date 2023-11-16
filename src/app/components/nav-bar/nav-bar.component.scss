@@ -38,10 +38,10 @@
       }
 
       .dontBook{
-        background-color: $background-primary;
+       @include buttonStandard;
       }
       .book{
-        background-color: $background-warn;
+       @include buttonHover;
       }
       
     }

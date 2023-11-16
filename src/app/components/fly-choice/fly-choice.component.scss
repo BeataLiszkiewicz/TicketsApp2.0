@@ -12,7 +12,8 @@
     width: 95%;
   }
  
-
+.weather{
+  max-width: 992px;
   .weatherForecast{
     display: flex;
     flex-direction: row;
@@ -36,5 +37,7 @@
 
     
   }
+}
+  
 }
 

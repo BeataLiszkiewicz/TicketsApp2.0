@@ -10,6 +10,7 @@ import { FromFlyChoiceService } from 'src/app/services/from-fly-choice.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeparturesCalendarComponent } from '../departures-calendar/departures-calendar.component';
 import { DataFromCalendarService } from 'src/app/services/data-from-calendar.service';
+import { PassengerSelectionComponent } from '../passenger-selection/passenger-selection.component';
 
 @Component({
   selector: 'app-fly-choice',
@@ -27,6 +28,7 @@ export class FlyChoiceComponent {
   dataFromCalendar: any;
   departure: string = '';
   oneAirport!: ALLAirports | undefined;
+  passengersNumber: number = 0;
   weatherPlace: string = '';
   weatherPlaceBefore: string = '';
   weatherPlaceCoordinates: CityCoordinates[] = [];
@@ -183,7 +185,7 @@ export class FlyChoiceComponent {
       autoFocus: false,
       hasBackdrop: true,
       backdropClass: '',
-      maxWidth:'100vw',
+      maxWidth: '100vw',
       position: {
         top: '',
         bottom: '',
@@ -192,4 +194,31 @@ export class FlyChoiceComponent {
       },
     });
   }
+
+  openPassengerChoice() {
+    const passengersInfo = this.dialogRef.open(PassengerSelectionComponent, {
+      disableClose: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      backdropClass: '',
+      height: '',
+      position: {
+        top: '',
+        bottom: '',
+        left: '',
+        right: '',
+      },
+    });
+
+    passengersInfo.afterClosed().subscribe((result) => {
+      this.passengersNumber = result.adults + result.children + result.infants;
+      this.forDataService.setPassengers({
+        adults: result.adults,
+        children: result.children,
+        infants: result.infants,
+      });
+    });
+  }
+
+
 }

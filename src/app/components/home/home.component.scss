@@ -177,8 +177,11 @@ h2 {
 
       .flyingPlane {
         @include plane();
-       background-color: $background-warn;
-       
+
+        background: radial-gradient(
+          $background-warn 40%,
+          $background-primary 100%
+        );
       }
     }
   }
@@ -192,7 +195,6 @@ h2 {
 .destinationBackground {
   background-color: $background-primary;
   height: 90vh;
-  
 
   .destinations {
     height: 90vh;

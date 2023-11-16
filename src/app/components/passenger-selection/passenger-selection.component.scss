@@ -1,0 +1,84 @@
+@import "../../../myTheme";
+
+.main {
+  background-color: $background-neutral-light;
+  width: 375px;
+  position: relative;
+  left: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-wrap: wrap;
+  
+
+  .form {
+    font-size: 1.5rem;
+    width: 100%;
+    justify-self: center;
+
+    .label {
+      padding: 2rem 0 0.5rem 1rem;
+      width: 100%;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .choice {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: row;
+      width: 100%;
+
+      button {
+        cursor: pointer;
+        background-color: $background-primary;
+        border-radius: 50%;
+        border: 1px solid #00adfb;
+        box-shadow: 2px 2px 5px $background-neutral;
+        color: $background-neutral-light;
+        margin: 1px;
+        width: 30px;
+        height: 30px;
+        font-size: 22px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+      }
+
+      input {
+        background-color: $background-primary;
+        @media (orientation: landscape) {
+          font-size: 1.1rem;
+        }
+      }
+    }
+    .warning {
+      margin-left: 1px;
+      color: $background-warn;
+      font-size: 1.3rem
+    }
+
+    .submit {
+      @include buttonStandard;
+      width: 90%;
+      margin: 2rem 5%;
+      height: 3rem;
+
+      @media (orientation: landscape) {
+        font-size: 1.2rem;
+      }
+
+      &:hover:enabled{
+        @include buttonHover;
+      }
+
+      
+    }
+  }
+}
