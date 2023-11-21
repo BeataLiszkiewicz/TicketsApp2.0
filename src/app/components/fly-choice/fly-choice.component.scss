@@ -50,7 +50,7 @@
   }
 
   .back{
-    background-color: rgba($background-neutral-light,0.1);
+    background-color: rgba($background-neutral-light,0.4);
     width: 100%;
     @media (min-width:576px){
       width: 50%;
@@ -65,7 +65,7 @@
     align-items: center;
     flex-direction: column;
     border-radius: 15px;
-    background-color: rgba($background-neutral-light,0.1);
+    background-color: rgba($background-neutral-light,0.4);
     font-stretch:ultra-expanded;
     font-size: 1rem;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -73,14 +73,17 @@
     color: $background-primary;
     max-height: 25%;
 
-    
+    label{
+      color: $background-neutral;
+      font-size: 1em;
+    }
 
     select, input{
-      font-size: 1.5rem;
+      font-size: 2rem;
       width: 90%;
       margin: 0 auto;
-      background-color: rgba($background-neutral-light,0.4);
-      color: $background-primary;;
+      background-color: rgba($background-neutral-light,0);
+      color: $background-primary;
       border: none;
       border-radius: 5px;
       flex-grow: 0.5;
@@ -88,7 +91,8 @@
     }
 
     option{
-      background-color: $background-neutral-light;
+      background-color: $background-neutral;
+      color: $background-neutral-light;
     }
   }
 

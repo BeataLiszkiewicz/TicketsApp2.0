@@ -19,6 +19,8 @@
     .label {
       padding: 2rem 0 0.5rem 1rem;
       width: 100%;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
 
     p {
@@ -53,9 +55,7 @@
 
       input {
         background-color: $background-primary;
-        @media (orientation: landscape) {
-          font-size: 1.1rem;
-        }
+        font-size: 1.3rem;
       }
     }
     .warning {
@@ -69,6 +69,7 @@
       width: 90%;
       margin: 2rem 5%;
       height: 3rem;
+      font-size: 2rem;
 
       @media (orientation: landscape) {
         font-size: 1.2rem;

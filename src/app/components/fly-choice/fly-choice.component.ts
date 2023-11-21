@@ -201,6 +201,7 @@ export class FlyChoiceComponent {
       autoFocus: false,
       hasBackdrop: true,
       backdropClass: '',
+      maxWidth: '100vw',
       height: '',
       position: {
         top: '',

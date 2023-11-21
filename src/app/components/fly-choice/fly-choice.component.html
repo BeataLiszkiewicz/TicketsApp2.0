@@ -67,33 +67,31 @@
           </option>
         </select>
       </div>
-      <div class="calendar back" *ngIf="departure.value !== '' && arrival.value !== ''">
-        <ng-container *ngIf="departure.value !== '' && arrival.value !== ''">
-          <div class="field">
-            <label for="departureDay">Departure day:</label>
-            <input
-              required
-              type="date"
-              #date
-              (click)="openCalendar()"
-              [ngModel]="dataFromCalendar.departureDate | date : 'yyyy-MM-dd'"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-        </ng-container>
+      <div
+        class="calendar back field"
+        *ngIf="departure.value !== '' && arrival.value !== ''"
+      >
+        <label for="departureDay">Departure day:</label>
+        <input
+          required
+          type="date"
+          #date
+          (click)="openCalendar()"
+          [ngModel]="dataFromCalendar.departureDate | date : 'yyyy-MM-dd'"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <div class="passengers back" *ngIf="departure.value !== '' && arrival.value !== ''">
-        <ng-container >
-          <div class="field">
-            <label for="passenger">Number of passengers:</label>
-            <input
-              required
-              (click)="openPassengerChoice()"
-              [ngModel]="passengersNumber"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-        </ng-container>
+      <div
+        class="passengers back field"
+        *ngIf="departure.value !== '' && arrival.value !== ''"
+      >
+        <label for="passenger">Number of passengers:</label>
+        <input
+          required
+          (click)="openPassengerChoice()"
+          [ngModel]="passengersNumber"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
     </form>
   </div>
