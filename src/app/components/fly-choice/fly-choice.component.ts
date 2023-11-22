@@ -179,6 +179,10 @@ export class FlyChoiceComponent {
     this.weatherPlaceBefore = city;
   }
 
+  buy(){
+    console.log("bought")
+  }
+
   openCalendar() {
     this.dialogRef.open(DeparturesCalendarComponent, {
       disableClose: false,
