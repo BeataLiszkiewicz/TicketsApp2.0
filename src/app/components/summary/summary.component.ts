@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BookPlaneService } from 'src/app/services/book-plane.service';
+import { PassengerService } from 'src/app/services/passenger.service';
+import { Flight } from 'src/app/interfaces/flight';
 
 @Component({
   selector: 'app-summary',
@@ -7,10 +9,15 @@ import { BookPlaneService } from 'src/app/services/book-plane.service';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent {
-
-  constructor(private bookService: BookPlaneService){}
+  allDetails!:Flight;
+  constructor(private bookService: BookPlaneService,
+    private passengerService:PassengerService
+    ){}
 
   ngOnInit(){
     this.bookService.setBookingButton(true);
+
+    this.allDetails=this.passengerService.returnDetails();
+    console.log(this.allDetails)
   }
 }

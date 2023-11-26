@@ -6,11 +6,13 @@ import { ALLAirports } from 'src/app/interfaces/allairports';
 import { CityCoordinates } from 'src/app/interfaces/city-coordinates';
 import coordinates from './../../../assets/data/cityCoordinates.json';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
-import { FromFlyChoiceService } from 'src/app/services/from-fly-choice.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeparturesCalendarComponent } from '../departures-calendar/departures-calendar.component';
 import { DataFromCalendarService } from 'src/app/services/data-from-calendar.service';
 import { PassengerSelectionComponent } from '../passenger-selection/passenger-selection.component';
+import { PassengerService } from 'src/app/services/passenger.service';
+import { TicketPriceService } from 'src/app/services/ticket-price.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fly-choice',
@@ -24,6 +26,7 @@ export class FlyChoiceComponent {
   arrival: string = '';
   availableArrivals: string[] = [];
   availableDepartures: string[] = [];
+  clearCalendar: boolean = false;
   dailyWeatherForecast: any = [];
   dataFromCalendar: any;
   departure: string = '';
@@ -37,9 +40,11 @@ export class FlyChoiceComponent {
     private bookService: BookPlaneService,
     private readonly form: FormBuilder,
     private weatherService: WeatherApiService,
-    private forDataService: FromFlyChoiceService,
     private dialogRef: MatDialog,
-    private fromCalendarService: DataFromCalendarService
+    private fromCalendarService: DataFromCalendarService,
+    private passengerService: PassengerService,
+    private ticketsService: TicketPriceService,
+    private router: Router
   ) {}
   ngOnInit() {
     this.bookService.setBookingButton(true);
@@ -75,9 +80,6 @@ export class FlyChoiceComponent {
       this.fromCalendarService.getData().subscribe({
         next: (el: any) => {
           this.dataFromCalendar = el;
-          if (el !== '') {
-            // this.disable = true;
-          }
         },
         error: (err: any) => console.log(err),
       });
@@ -104,11 +106,27 @@ export class FlyChoiceComponent {
             this.weatherPlace = chosedAirport;
           }
 
+          if (
+            this.clearCalendar === true &&
+            this.dataFromCalendar.departureDate !== undefined
+          ) {
+            this.dataFromCalendar.departureDate = undefined;
+            this.ticketsService.createPriceList();
+          }
+
           this.departure = chosedAirport;
-          this.forDataService.setDeparture(this.departure);
+          this.passengerService.fillDetails('from', this.departure);
         }
       } else if (direction === 'arrival') {
         if (this.departure !== '') {
+          if (
+            this.clearCalendar === true &&
+            this.dataFromCalendar.departureDate !== undefined
+          ) {
+            this.dataFromCalendar.departureDate = undefined;
+            this.ticketsService.createPriceList();
+          }
+
           this.availableDepartures = [this.departure];
         } else {
           this.availableDepartures = [];
@@ -131,7 +149,10 @@ export class FlyChoiceComponent {
         }
 
         this.arrival = chosedAirport;
-        this.forDataService.setArrival(this.arrival);
+        this.passengerService.fillDetails('to', this.arrival);
+      }
+      if (this.arrival !== '' && this.departure !== '') {
+        this.clearCalendar = true;
       }
     }
 
@@ -179,8 +200,9 @@ export class FlyChoiceComponent {
     this.weatherPlaceBefore = city;
   }
 
-  buy(){
-    console.log("bought")
+  buy() {
+    this.passengerService.createPassengersList();
+    this.router.navigate(['/summary'])
   }
 
   openCalendar() {
@@ -217,13 +239,11 @@ export class FlyChoiceComponent {
 
     passengersInfo.afterClosed().subscribe((result) => {
       this.passengersNumber = result.adults + result.children + result.infants;
-      this.forDataService.setPassengers({
+      this.passengerService.fillDetails('passengersTotal', {
         adults: result.adults,
         children: result.children,
         infants: result.infants,
       });
     });
   }
-
-
 }

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FromFlyChoiceService } from 'src/app/services/from-fly-choice.service';
+import { PassengerService } from 'src/app/services/passenger.service';
 
 @Component({
   selector: 'app-passenger-selection',
@@ -16,16 +16,11 @@ export class PassengerSelectionComponent {
   constructor(
     public dialogRef: MatDialogRef<PassengerSelectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private readonly flyChoiceService: FromFlyChoiceService
+    private readonly passengerService: PassengerService
   ) {}
 
   ngOnInit() {
-    this.flyChoiceService.getPassengers().subscribe({
-      next: (el: any) => {
-        this.passengers = el;
-      },
-      error: (err: any) => console.log(err),
-    });
+    this.passengers = this.passengerService.getOptionDetails('passengersTotal');
 
     if (this.passengers.adults > 0 || this.passengers.children > 0) {
       this.adults = this.passengers.adults;

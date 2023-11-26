@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FromFlyChoiceService } from 'src/app/services/from-fly-choice.service';
 import { ExchangeRateService } from 'src/app/services/exchange-rate.service';
 import { DataFromCalendarService } from 'src/app/services/data-from-calendar.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,7 +14,7 @@ import { Flight } from 'src/app/interfaces/flight';
   styleUrls: ['./departures-calendar.component.scss'],
 })
 export class DeparturesCalendarComponent {
-  arrival$: string = '';
+  arrival: string = '';
   calendar: Calendar[] = [];
   calendarMonth: number = 0;
   container: Array<number> = [];
@@ -23,7 +22,7 @@ export class DeparturesCalendarComponent {
   currentMonth: number = new Date().getMonth() + 1;
   currentYear: number = new Date().getFullYear();
   public data: any;
-  departure$: string = '';
+  departure: string = '';
   detailsForServices!: Flight;
   emptyDays: number = 0;
   finalPrice: Array<any> = [];
@@ -37,7 +36,6 @@ export class DeparturesCalendarComponent {
   week: any = ['Mon.', 'Tues.', 'Wed.', 'Thurs.', 'Fri.', 'Sat.', 'Sun.'];
 
   constructor(
-    private flyChoiceService: FromFlyChoiceService,
     private exchangeService: ExchangeRateService,
     private dataServise: DataFromCalendarService,
     private dialogRef: MatDialog,
@@ -55,23 +53,18 @@ export class DeparturesCalendarComponent {
 
     this.priceList = this.priceService.ticketsPriceList;
     this.createDataForCalendar();
+    console.log(this.priceList)
+  }
 
-    console.log(this.calendar);
+  ngOnDestroy(){
+    this.priceList=[];
   }
 
   getDepartureAndArrival() {
-    this.flyChoiceService.getArrival().subscribe({
-      next: (el: string) => {
-        this.arrival$ = el;
-      },
-      error: (err: any) => console.log(err),
-    });
-    this.flyChoiceService.getDeparture().subscribe({
-      next: (el: string) => {
-        this.departure$ = el;
-      },
-      error: (err: any) => console.log(err),
-    });
+  
+
+    this.arrival=this.passengerService.getOptionDetails("to")
+    this.departure=this.passengerService.getOptionDetails('from')
   }
 
   changeCurrency(param: string) {
@@ -194,6 +187,11 @@ export class DeparturesCalendarComponent {
         ),
         price: Math.round(this.finalPrice[0][1] / this.currencyRate[0]),
         currency: this.currencyRate[1],
+        passengersTotal:{
+          adults:0,
+          children:0,
+          infants:0
+        },
         passengers: [],
       };
 
