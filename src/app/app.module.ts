@@ -22,6 +22,7 @@ import { MonthNamePipe } from './pipes/month-name.pipe';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { PassengerSelectionComponent } from './components/passenger-selection/passenger-selection.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 
 
@@ -36,7 +37,8 @@ import { PassengerSelectionComponent } from './components/passenger-selection/pa
     DeparturesCalendarComponent,
     CalendarCurrencyPipe,
     MonthNamePipe,
-    PassengerSelectionComponent
+    PassengerSelectionComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule, 

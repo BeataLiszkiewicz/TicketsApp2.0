@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Calendar } from 'src/app/interfaces/calendar';
 import { TicketPriceService } from 'src/app/services/ticket-price.service';
+import { PassengerService } from 'src/app/services/passenger.service';
+import { Flight } from 'src/app/interfaces/flight';
 
 @Component({
   selector: 'app-departures-calendar',
@@ -16,18 +18,19 @@ export class DeparturesCalendarComponent {
   arrival$: string = '';
   calendar: Calendar[] = [];
   calendarMonth: number = 0;
-  container: Array<number>=[];
+  container: Array<number> = [];
   currencyRate: [number, string] = [1, 'PLN'];
   currentMonth: number = new Date().getMonth() + 1;
   currentYear: number = new Date().getFullYear();
   public data: any;
   departure$: string = '';
+  detailsForServices!: Flight;
   emptyDays: number = 0;
   finalPrice: Array<any> = [];
   lastDay: number = 0;
   price: number = 0;
   priceList: Array<number> = [];
-  pricePosition:number=0;
+  pricePosition: number = 0;
   storedCurrency: string | null = sessionStorage.getItem('currency');
   today: number = new Date().getDate();
   waiting: boolean = false;
@@ -39,7 +42,8 @@ export class DeparturesCalendarComponent {
     private dataServise: DataFromCalendarService,
     private dialogRef: MatDialog,
     private SpinnerService: SpinnerService,
-    private priceService: TicketPriceService
+    private priceService: TicketPriceService,
+    private passengerService: PassengerService
   ) {}
 
   ngOnInit() {
@@ -52,7 +56,7 @@ export class DeparturesCalendarComponent {
     this.priceList = this.priceService.ticketsPriceList;
     this.createDataForCalendar();
 
-    console.log(this.calendar)
+    console.log(this.calendar);
   }
 
   getDepartureAndArrival() {
@@ -143,14 +147,11 @@ export class DeparturesCalendarComponent {
       }
       // generate price for each day
       for (let k = 1; k < this.lastDay + 1; k++) {
-        this.container = [
-          k,
-          this.priceList[this.pricePosition]
-        ];
+        this.container = [k, this.priceList[this.pricePosition]];
         this.calendar[i].days.push(this.container);
         this.container = [];
 
-        this.pricePosition++
+        this.pricePosition++;
       }
     }
 
@@ -183,18 +184,32 @@ export class DeparturesCalendarComponent {
       this.finalPrice = this.calendar[this.calendarMonth].days.filter(
         (el: any) => el[0] === param[0]
       );
-      this.dataServise.setData({
-        departureDate: new Date(
+      this.detailsForServices = {
+        from: '',
+        to: '',
+        date: new Date(
           this.calendar[this.calendarMonth].year,
           this.calendar[this.calendarMonth].month - 1,
           param[0]
         ),
         price: Math.round(this.finalPrice[0][1] / this.currencyRate[0]),
         currency: this.currencyRate[1],
+        passengers: [],
+      };
+
+      this.dataServise.setData({
+        departureDate: this.detailsForServices.date,
+        price: this.detailsForServices.price,
+        currency: this.detailsForServices.currency,
       });
+
+      this.passengerService.fillDetails("date",this.detailsForServices.date);
+      this.passengerService.fillDetails("price",this.detailsForServices.price);
+      this.passengerService.fillDetails("currency",this.detailsForServices.currency);
 
       sessionStorage.setItem('currency', this.currencyRate[1]);
     }
+
     this.dialogRef.closeAll();
   }
 }
