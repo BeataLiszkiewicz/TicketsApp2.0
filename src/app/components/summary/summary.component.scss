@@ -1,3 +1,45 @@
-.summaryPage{
-    padding-top: 6rem;
+@import "../../../myTheme";
+
+@mixin flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summaryPage {
+  padding-top: 6rem;
+
+  .summary {
+    display: grid;
+    grid-template-columns: 70% 30%;
+
+    .direction {
+      gap: 1rem;
+      font-size: 8vmin;
+      color: $background-neutral-light;
+      border-right: 2px solid $background-neutral-light;
+
+      p{
+        @include flexCenter();
+      }
+
+      .from{
+        margin-bottom:2rem;
+      }
+
+      .plane{
+        transform: scale(3);
+      }
+
+      .to{
+        margin-top: 2rem;
+      }
+    }
+
+    .date{
+        @include flexCenter();
+        color: $background-neutral-light;
+        font-size: 1.5rem;
+    }
+  }
 }

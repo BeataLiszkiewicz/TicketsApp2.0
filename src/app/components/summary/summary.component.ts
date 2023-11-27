@@ -16,8 +16,6 @@ export class SummaryComponent {
 
   ngOnInit(){
     this.bookService.setBookingButton(true);
-
     this.allDetails=this.passengerService.returnDetails();
-    console.log(this.allDetails)
   }
 }

@@ -3,7 +3,8 @@ export interface Passenger{
     surname:string,
     ticketClass:string,
     seat:string,
-    luggage:string
+    luggage:string,
+    price:number
 }
 
 export interface People{

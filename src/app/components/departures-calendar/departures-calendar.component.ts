@@ -53,7 +53,7 @@ export class DeparturesCalendarComponent {
 
     this.priceList = this.priceService.ticketsPriceList;
     this.createDataForCalendar();
-    console.log(this.priceList)
+    
   }
 
   ngOnDestroy(){

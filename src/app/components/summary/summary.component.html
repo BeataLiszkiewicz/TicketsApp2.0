@@ -1,7 +1,36 @@
 <div class="summaryPage">
-    <div class="buyTickets"></div>
-    <div class="summary"></div>
-    <div class="ticketsContainer">
-        
+  <div class="summary">
+    <div class="direction">
+      <p class="from">{{ allDetails.from }}</p>
+      <p class="plane"><mat-icon fontIcon="flight_takeoff"></mat-icon></p>
+      <p class="to">{{ allDetails.to }}</p>
     </div>
+    <div class="date"><p>{{ allDetails.date | date : "dd.MM.yyyy" }}</p></div>
+  </div>
+  <div class="ticketsContainer">
+    <div class="passenger" *ngFor="let person of allDetails.passengers">
+        <p class="ticketClass">{{person.ticketClass}}</p>
+        <p class="name">
+            <label for="name">Name:</label>
+            <input type="text" name="name">
+        </p>
+        <p class="surname">
+            <label for="surname">Surname:</label>
+            <input type="text" name="surname">
+        </p>
+        <p class="seat">
+            <label for="seat">Seat:</label>
+            <input type="text" name="seat">
+        </p>
+        <p class="luggage">
+            <label for="luggage">Luggage:</label>
+            <select name="luggage" id="">
+                <option value="0">Carry-on baggage only</option>
+                <option value="150">Checked baggage +150</option>
+                <option value="175">Checked baggage plus small bag +175</option>
+            </select>
+        </p>
+        <p class="personCost"></p>
+    </div>
+  </div>
 </div>
