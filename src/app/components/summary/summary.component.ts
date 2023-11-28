@@ -18,4 +18,8 @@ export class SummaryComponent {
     this.bookService.setBookingButton(true);
     this.allDetails=this.passengerService.returnDetails();
   }
+
+  go(){
+    console.log(this.allDetails)
+  }
 }

@@ -11,6 +11,7 @@ export class PassengerService {
     from: '',
     to: '',
     date: new Date(1999),
+    month:1,
     price: 0,
     currency: '',
     passengersTotal: {
@@ -71,5 +72,8 @@ export class PassengerService {
         price:0
       });
     }
+
+    this.flightDetails.month=this.flightDetails.date.getMonth();
+    
   }
 }

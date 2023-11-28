@@ -17,6 +17,7 @@ export interface Flight {
     from:string,
     to:string,
     date:Date,
+    month:number,
     price:number,
     currency:string,
     passengersTotal:People,

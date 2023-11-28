@@ -171,7 +171,8 @@ export class DeparturesCalendarComponent {
   }
 
   choseDate(param: any) {
-    if (param[1] === '') {
+    
+    if (param[1] === 0) {
       alert('Sorry, chosen date falls in the past.');
     } else {
       this.finalPrice = this.calendar[this.calendarMonth].days.filter(
@@ -185,6 +186,7 @@ export class DeparturesCalendarComponent {
           this.calendar[this.calendarMonth].month - 1,
           param[0]
         ),
+        month:0,
         price: Math.round(this.finalPrice[0][1] / this.currencyRate[0]),
         currency: this.currencyRate[1],
         passengersTotal:{
@@ -206,8 +208,9 @@ export class DeparturesCalendarComponent {
       this.passengerService.fillDetails("currency",this.detailsForServices.currency);
 
       sessionStorage.setItem('currency', this.currencyRate[1]);
+      this.dialogRef.closeAll();
     }
 
-    this.dialogRef.closeAll();
+    
   }
 }
