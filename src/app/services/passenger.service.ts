@@ -46,7 +46,7 @@ export class PassengerService {
         surname: '',
         ticketClass: 'Adult',
         seat: '',
-        luggage: 'standard',
+        luggage: 0,
         price:this.flightDetails.price
       });
     }
@@ -57,8 +57,8 @@ export class PassengerService {
         surname: '',
         ticketClass: 'Child',
         seat: '',
-        luggage: 'standard',
-        price:this.flightDetails.price*0.75
+        luggage: 0,
+        price:Math.round(this.flightDetails.price*0.75)
       });
     }
 
@@ -68,7 +68,7 @@ export class PassengerService {
         surname: '',
         ticketClass: 'Infant',
         seat: '',
-        luggage: 'standard',
+        luggage: 0,
         price:0
       });
     }

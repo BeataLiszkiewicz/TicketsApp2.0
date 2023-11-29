@@ -6,9 +6,7 @@
       <p class="to">{{ allDetails.to }}</p>
     </div>
     <div class="date">
-      <p>{{ allDetails.date | date : "dd" }}</p>
-      <p>{{ allDetails.month | monthName }}</p>
-      <p>{{ allDetails.date | date : "yyyy" }}</p>
+      {{allDetails.date|date : "dd.MM.yyyy"}}
     </div>
   </div>
   <div class="ticketsContainer">
@@ -47,12 +45,12 @@
         >Luggage:</label
       >
       <select name="luggage" id="" class="two" [(ngModel)]="allDetails.passengers[i].luggage">
-        <option value="0" selected>Carry-on baggage only</option>
-        <option value="150">Checked baggage +150</option>
-        <option value="175">Checked baggage plus small bag +175</option>
+        <option value=0>Carry-on baggage only</option>
+        <option value={{extraLuggage}}>Checked baggage +{{extraLuggage}} {{allDetails.currency}}</option>
+        <option value={{extraLuggagePlus}}>Checked baggage plus small bag +{{extraLuggagePlus}} {{allDetails.currency}}</option>
       </select>
 
-      <p class="personCost one"></p>
+      <p class="personCost" *ngIf="person.price!==0||person.luggage!==0">{{person.price*1 + person.luggage*1}} {{allDetails.currency}}</p>
     </div>
     <button (click)="go()"></button>
   </div>
