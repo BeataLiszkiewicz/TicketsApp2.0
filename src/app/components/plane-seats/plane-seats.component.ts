@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import FlyDistance from '../../../assets/data/flyDistance.json';
 import { PassengerService } from 'src/app/services/passenger.service';
 import { Router } from '@angular/router';
+import { PlaneService } from 'src/app/services/plane.service';
 
 @Component({
   selector: 'app-plane-seats',
@@ -9,12 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./plane-seats.component.scss'],
 })
 export class PlaneSeatsComponent {
-  arrival: string = 'Rzym';
+  arrival!: string;
   distance!: any;
   flyDistance!: any;
 
   constructor(
     private readonly passengerService: PassengerService,
+    private planeService:PlaneService,
     private router: Router
   ) {}
 
