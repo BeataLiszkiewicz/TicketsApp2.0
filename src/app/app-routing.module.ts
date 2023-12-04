@@ -5,13 +5,15 @@ import { HomeComponent } from './components/home/home.component';
 import { FlyChoiceComponent } from './components/fly-choice/fly-choice.component';
 import { DeparturesCalendarComponent } from './components/departures-calendar/departures-calendar.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.component';
 
 const routes:Routes=[
   {path:'', redirectTo:'home', pathMatch:'full'},
   {path:'home', component:HomeComponent},
   {path:'flyChoice', component:FlyChoiceComponent},
   {path:'calendar', component:DeparturesCalendarComponent},
-  {path:'summary', component:SummaryComponent}
+  {path:'summary', component:SummaryComponent},
+  {path:'plane', component:PlaneSeatsComponent}
  
 ]
 

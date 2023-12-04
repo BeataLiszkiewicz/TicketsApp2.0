@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BookPlaneService } from 'src/app/services/book-plane.service';
 import { PassengerService } from 'src/app/services/passenger.service';
 import { Flight } from 'src/app/interfaces/flight';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -14,7 +15,8 @@ export class SummaryComponent {
   extraLuggagePlus!:number;
 
   constructor(private bookService: BookPlaneService,
-    private passengerService:PassengerService
+    private passengerService:PassengerService,
+    private router: Router
     ){}
 
   ngOnInit(){
@@ -24,7 +26,7 @@ export class SummaryComponent {
   }
 
   go(){
-    console.log(this.allDetails)
+    this.router.navigate(['/plane'])
   }
 
   availableLuggageType(){

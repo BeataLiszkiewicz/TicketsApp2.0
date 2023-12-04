@@ -1,0 +1,78 @@
+@import "../../../myTheme";
+
+@mixin fourColumns {
+  grid-template-columns: 1rem repeat(5, 1fr) 1rem;
+  .columnA {
+    grid-column: 2;
+  }
+  .columnB {
+    grid-column: 3;
+  }
+
+  .columnC {
+    grid-column: 5;
+  }
+  .columnD {
+    grid-column: 6;
+  }
+}
+
+@mixin sixColumns {
+  grid-template-columns: 1rem repeat(7, 1fr) 1rem;
+  .columnA {
+    grid-column: 2;
+  }
+  .columnB {
+    grid-column: 3;
+  }
+
+  .columnC {
+    grid-column: 4;
+  }
+  .columnD {
+    grid-column: 6;
+  }
+  .columnE {
+    grid-column: 7;
+  }
+  .columnF {
+    grid-column: 8;
+  }
+}
+
+.planeContainer {
+  padding-top: 4rem;
+  width: 250px;
+
+  .plane {
+    background-color: $background-neutral-light;
+    border-radius: 25% 25% 0 0;
+    height: 95vh;
+    position: relative;
+
+    .button {
+      height: 1.8rem;
+    }
+
+    .seatsContainer, .seats {
+      position: absolute;
+      bottom: 0;
+      height: 80vh;
+      width: 100%;
+
+      display: grid;
+      @include fourColumns();
+    }
+
+    .moreRows {
+      position: absolute;
+      bottom: 0;
+      height: 80vh;
+      width: 100%;
+
+      overflow: scroll;
+      display: grid;
+      @include sixColumns();
+    }
+  }
+}

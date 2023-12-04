@@ -1,0 +1,59 @@
+<div class="planeContainer">
+  <div class="plane">
+    <div class="seatsContainer" *ngIf="distance === 'short'; else biggerPlane">
+      <ng-container *ngFor="let _ of [].constructor(20); let i = index">
+        <button
+          class="columnA button"
+          value="{{ i + 1 }}A"
+          id="seat{{ i + 1 }}A"
+          name="clear"
+        >
+          {{ i + 1 }}A
+        </button>
+        <button class="columnB button" value="{{ i + 1 }}B" name="clear">
+          {{ i + 1 }}B
+        </button>
+        <button class="columnC button" value="{{ i + 1 }}C" name="clear">
+          {{ i + 1 }}C
+        </button>
+        <button class="columnD button" value="{{ i + 1 }}D" name="clear">
+          {{ i + 1 }}D
+        </button>
+      </ng-container>
+    </div>
+    <ng-template #biggerPlane>
+      <div [ngClass]="[distance === 'mid' ? 'seats' : 'moreRows']">
+        <ng-container *ngFor="let _ of [].constructor(36); let i = index">
+          <button class="columnA button" value="{{ i + 1 }}A" name="clear">
+            {{ i + 1 }}A
+          </button>
+          <button class="columnB button" value="{{ i + 1 }}B" name="clear">
+            {{ i + 1 }}B
+          </button>
+          <button class="columnC button" value="{{ i + 1 }}C" name="clear">
+            {{ i + 1 }}C
+          </button>
+          <button class="columnD button" value="{{ i + 1 }}D" name="clear">
+            {{ i + 1 }}D
+          </button>
+          <button
+            class="columnE button"
+            value="{{ i + 1 }}E"
+            name="clear"
+            *ngIf="distance === 'long'"
+          >
+            {{ i + 1 }}E
+          </button>
+          <button
+            class="columnF button"
+            value="{{ i + 1 }}F"
+            name="clear"
+            *ngIf="distance === 'long'"
+          >
+            {{ i + 1 }}F
+          </button>
+        </ng-container>
+      </div>
+    </ng-template>
+  </div>
+</div>

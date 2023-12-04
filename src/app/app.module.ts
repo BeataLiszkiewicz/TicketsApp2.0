@@ -23,6 +23,8 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { PassengerSelectionComponent } from './components/passenger-selection/passenger-selection.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.component'
 
 
 
@@ -38,7 +40,8 @@ import { SummaryComponent } from './components/summary/summary.component';
     CalendarCurrencyPipe,
     MonthNamePipe,
     PassengerSelectionComponent,
-    SummaryComponent
+    SummaryComponent,
+    PlaneSeatsComponent
   ],
   imports: [
     BrowserModule, 
@@ -53,7 +56,8 @@ import { SummaryComponent } from './components/summary/summary.component';
     MatButtonToggleModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule
   ],
   providers: [{
     provide: MatDialogRef,
