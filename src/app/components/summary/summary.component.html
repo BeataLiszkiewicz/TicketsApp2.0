@@ -20,7 +20,7 @@
         type="text"
         name="name"
         class="two"
-        [(ngModel)]="allDetails.passengers[i].name"
+        [(ngModel)]="person.name"
       />
 
       <label for="surname" class="one">Surname</label>
@@ -28,18 +28,18 @@
         type="text"
         name="surname"
         class="two"
-        [(ngModel)]="allDetails.passengers[i].surname"
+        [(ngModel)]="person.surname"
       />
-
+    <ng-container *ngIf="person.ticketClass!=='Infant'">
       <label for="seat" class="one">Seat:</label>
       <input
         type="text"
         name="seat"
         class="two"
-        [(ngModel)]="allDetails.passengers[i].seat"
-        (click)="choseSeat()"
+        [(ngModel)]="person.seat"
+        (focus)="choseSeat(i)"
       />
-
+    </ng-container>
       <label
         for="luggage"
         class="one"
@@ -72,13 +72,13 @@
                   >
                     {{ i + 1 }}A
                   </button>
-                  <button class="columnB button" value="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
+                  <button class="columnB button" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
                     {{ i + 1 }}B
                   </button>
-                  <button class="columnC button" value="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
+                  <button class="columnC button" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
                     {{ i + 1 }}C
                   </button>
-                  <button class="columnD button" value="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
+                  <button class="columnD button" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
                     {{ i + 1 }}D
                   </button>
                 </ng-container>
@@ -86,21 +86,22 @@
               <ng-template #biggerPlane>
                 <div [ngClass]="[distance === 'mid' ? 'seats' : 'moreRows']">
                   <ng-container *ngFor="let _ of [].constructor(36); let i = index">
-                    <button class="columnA button" value="{{ i + 1 }}A" name="clear" (click)="seatClicked()">
+                    <button class="columnA button" value="{{ i + 1 }}A" id="{{ i + 1 }}A" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}A
                     </button>
-                    <button class="columnB button" value="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
+                    <button class="columnB button" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}B
                     </button>
-                    <button class="columnC button" value="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
+                    <button class="columnC button" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}C
                     </button>
-                    <button class="columnD button" value="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
+                    <button class="columnD button" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}D
                     </button>
                     <button
                       class="columnE button"
                       value="{{ i + 1 }}E"
+                      id="{{ i + 1 }}E"
                       name="clear"
                       *ngIf="distance === 'long'"
                       (click)="seatClicked()"
@@ -110,6 +111,7 @@
                     <button
                       class="columnF button"
                       value="{{ i + 1 }}F"
+                      id="{{ i + 1 }}F"
                       name="clear"
                       *ngIf="distance === 'long'"
                       (click)="seatClicked()"

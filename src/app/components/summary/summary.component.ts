@@ -40,7 +40,8 @@ export class SummaryComponent {
   }
 
   go(){
-    this.router.navigate(['/plane'])
+   
+    console.log(this.allDetails)
   }
 
   availableLuggageType(){
@@ -60,8 +61,9 @@ export class SummaryComponent {
     }
   }
 
-  choseSeat(){
+  choseSeat(position:number){
     this.planeVisible=true;
+    console.log(position)
   }
 
   seatClicked(){
