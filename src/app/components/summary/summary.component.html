@@ -64,7 +64,7 @@
               <div class="seatsContainer" *ngIf="distance === 'short'; else biggerPlane">
                 <ng-container *ngFor="let _ of [].constructor(20); let i = index">
                   <button
-                    class="columnA button"
+                    class="columnA seat"
                     value="{{ i + 1 }}A"
                     id="seat{{ i + 1 }}A"
                     name="clear"
@@ -72,13 +72,13 @@
                   >
                     {{ i + 1 }}A
                   </button>
-                  <button class="columnB button" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
+                  <button class="columnB seat" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
                     {{ i + 1 }}B
                   </button>
-                  <button class="columnC button" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
+                  <button class="columnC seat" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
                     {{ i + 1 }}C
                   </button>
-                  <button class="columnD button" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
+                  <button class="columnD seat" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
                     {{ i + 1 }}D
                   </button>
                 </ng-container>
@@ -86,20 +86,20 @@
               <ng-template #biggerPlane>
                 <div [ngClass]="[distance === 'mid' ? 'seats' : 'moreRows']">
                   <ng-container *ngFor="let _ of [].constructor(36); let i = index">
-                    <button class="columnA button" value="{{ i + 1 }}A" id="{{ i + 1 }}A" name="clear" (click)="seatClicked()">
+                    <button class="columnA seat" value="{{ i + 1 }}A" id="{{ i + 1 }}A" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}A
                     </button>
-                    <button class="columnB button" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
+                    <button class="columnB seat" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}B
                     </button>
-                    <button class="columnC button" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
+                    <button class="columnC seat" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}C
                     </button>
-                    <button class="columnD button" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
+                    <button class="columnD seat" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
                       {{ i + 1 }}D
                     </button>
                     <button
-                      class="columnE button"
+                      class="columnE seat"
                       value="{{ i + 1 }}E"
                       id="{{ i + 1 }}E"
                       name="clear"
@@ -109,7 +109,7 @@
                       {{ i + 1 }}E
                     </button>
                     <button
-                      class="columnF button"
+                      class="columnF seat"
                       value="{{ i + 1 }}F"
                       id="{{ i + 1 }}F"
                       name="clear"

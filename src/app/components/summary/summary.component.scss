@@ -137,7 +137,7 @@
 
   .planeSidenav{
     position: absolute;
-    top: 0;
+    top: 40%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -154,10 +154,13 @@
       border-radius: 25% 25% 0 0;
       height: 95vh;
       position: relative;
-      overflow: scroll;
   
-      .button {
+      .seat {
         height: 1.8rem;
+      }
+
+      button[name="checked"] {
+        background-color: $background-warn;
       }
   
       .seatsContainer, .seats {
