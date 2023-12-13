@@ -1,3 +1,5 @@
+@import "../../../myTheme";
+
 .userContainer{
     padding-top: 6rem;
     display: flex;
@@ -11,5 +13,10 @@
     .createUser{
         display: flex;
         flex-direction: column;
+        color: $background-neutral-light;
+
+        .red{
+            color: red;
+        }
     }
 }

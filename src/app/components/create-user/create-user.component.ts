@@ -19,8 +19,10 @@ import {
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent {
-
+  passwordAgain:string='';
   haveUser(){
     
   }
+
+  
 }
