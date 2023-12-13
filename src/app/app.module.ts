@@ -24,7 +24,8 @@ import { ApiInterceptor } from './interceptors/api.interceptor';
 import { PassengerSelectionComponent } from './components/passenger-selection/passenger-selection.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.component'
+import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.component';
+import { CreateUserComponent } from './components/create-user/create-user.component'
 
 
 
@@ -41,7 +42,8 @@ import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.compon
     MonthNamePipe,
     PassengerSelectionComponent,
     SummaryComponent,
-    PlaneSeatsComponent
+    PlaneSeatsComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule, 

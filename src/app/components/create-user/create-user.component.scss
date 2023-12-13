@@ -1,0 +1,15 @@
+.userContainer{
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+
+    .header{
+        display: grid;
+        grid-template-columns: 40% 1fr 2rem;
+    }
+
+    .createUser{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -6,6 +6,7 @@ import { FlyChoiceComponent } from './components/fly-choice/fly-choice.component
 import { DeparturesCalendarComponent } from './components/departures-calendar/departures-calendar.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 
 const routes:Routes=[
   {path:'', redirectTo:'home', pathMatch:'full'},
@@ -13,7 +14,8 @@ const routes:Routes=[
   {path:'flyChoice', component:FlyChoiceComponent},
   {path:'calendar', component:DeparturesCalendarComponent},
   {path:'summary', component:SummaryComponent},
-  {path:'plane', component:PlaneSeatsComponent}
+  {path:'plane', component:PlaneSeatsComponent},
+  {path:'user', component:CreateUserComponent}
  
 ]
 
