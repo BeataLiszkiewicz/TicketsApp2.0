@@ -25,7 +25,8 @@ import { PassengerSelectionComponent } from './components/passenger-selection/pa
 import { SummaryComponent } from './components/summary/summary.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.component';
-import { CreateUserComponent } from './components/create-user/create-user.component'
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { LettersSizeDirective } from './directives/letters-size.directive'
 
 
 
@@ -43,7 +44,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     PassengerSelectionComponent,
     SummaryComponent,
     PlaneSeatsComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    LettersSizeDirective
   ],
   imports: [
     BrowserModule, 

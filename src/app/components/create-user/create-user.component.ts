@@ -19,7 +19,7 @@ import {
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent {
-  passwordAgain:string='';
+  passwordAgain:any="";
   haveUser(){
     
   }

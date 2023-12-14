@@ -47,8 +47,8 @@
         ngModel
         #password="ngModel"
         name="password"
-        pattern="^[A-Za-z]+$|^[0-9]+$"
-        maxlength="6"
+        minlength="7"
+        appLettersSize
         required
       />
       <p *ngIf="password.errors?.required && password.touched" class="red">
@@ -56,21 +56,15 @@
       </p>
       <p
         *ngIf="password.dirty"
-        [ngClass]="[password.errors?.pattern ? 'red' : 'green']"
+        [ngClass]="[password.errors?.appLettersSize?'red':'green']"
       >
-        Password must contains either letters or numbers
+        Password must contain uppercase and lowercase 
       </p>
       <p
         *ngIf="password.dirty"
-        [ngClass]="[password.errors?.appPasswordLetters ? 'red' : 'green']"
+        [ngClass]="[password.errors?.minlength?'red':'green']"
       >
-        Password must contains either uppercase or lowercase
-      </p>
-      <p
-        *ngIf="password.dirty"
-        [ngClass]="[password.errors?.maxLength ? 'red' : 'green']"
-      >
-        Password must not be longer than 6 digits
+        Password must be longer than 7 digits
       </p>
       <ng-container *ngIf="password.dirty">
         <label>Repeat password:</label>
@@ -115,14 +109,13 @@
         #email="ngModel"
         name="email"
         required
-        pattern="^[A-Za-z0-9]\w+@[a-z0-9.-]+\.[a-z]+$"
+        pattern="^[A-Za-z0-9]\w+@[a-z0-9.\-]+\.[a-z]+$"
       />
       <p *ngIf="email.errors?.required && email.touched" class="red">
         This field is mandatory
       </p>
       <p *ngIf="email.errors?.pattern" class="red">Invalid email address</p>
-
-      <button type="submit" [disabled]="!createUser.valid" class="button">
+      <button type="submit" [disabled]="!createUser.valid||passwordAgain.value!==password.value" class="button">
         Create user
       </button>
     </form>
