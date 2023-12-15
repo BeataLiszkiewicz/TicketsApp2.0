@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
-export function numberValidator(): ValidatorFn{
+export function specialCharacterValidator(): ValidatorFn{
   return (control: AbstractControl) : ValidationErrors | null => {
     const value = control.value;
 
@@ -8,8 +8,9 @@ export function numberValidator(): ValidatorFn{
       return null
     }
 
-    const isNumeric = /[0-9]/.test(value) 
+    const specialCharacter = /[!?~'@#$%^&*()-_+={};:"<>,.]/.test(value) 
 
-    return isNumeric?null:{appContainNumber:true}
+    
+    return specialCharacter?null:{appSpecialCharacter:true}
   }
 }

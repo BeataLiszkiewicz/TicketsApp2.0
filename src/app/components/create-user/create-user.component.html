@@ -49,10 +49,18 @@
         name="password"
         minlength="7"
         appLettersSize
+        appContainNumber
+        appSpecialCharacter
         required
       />
       <p *ngIf="password.errors?.required && password.touched" class="red">
         This field is mandatory
+      </p>
+      <p
+        *ngIf="password.dirty"
+        [ngClass]="[password.errors?.minlength?'red':'green']"
+      >
+        Password must be longer than 7 digits
       </p>
       <p
         *ngIf="password.dirty"
@@ -62,10 +70,17 @@
       </p>
       <p
         *ngIf="password.dirty"
-        [ngClass]="[password.errors?.minlength?'red':'green']"
+        [ngClass]="[password.errors?.appContainNumber?'red':'green']"
       >
-        Password must be longer than 7 digits
+        Password must contain at least one number 
       </p>
+      <p
+        *ngIf="password.dirty"
+        [ngClass]="[password.errors?.appSpecialCharacter?'red':'green']"
+      >
+        Password must contain special character
+      </p>
+      
       <ng-container *ngIf="password.dirty">
         <label>Repeat password:</label>
         <input type="password" ngModel #passwordAgain="ngModel" required name="passwordAgain"/>
