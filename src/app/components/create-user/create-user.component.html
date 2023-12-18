@@ -1,22 +1,23 @@
 <div class="userContainer">
   <div class="header">
-    <h2>Create user account</h2>
-    <div class="forButton"><button>X</button></div>
+    <h2 class="userTitle">Create user account</h2>
+    <div class="forButton" (click)="close()"><button>X</button></div>
   </div>
   <div class="userForm">
-    <form #createUser="ngForm" (ngSubmit)="haveUser()" class="createUser">
+    <form #createUser="ngForm" (ngSubmit)="haveUser(createUser)" class="createUser">
       <label for="login">Login: </label>
       <input
         type="text"
         ngModel
         #login="ngModel"
         name="login"
+        appLoginCheck
         minlength="5"
         pattern="\w+"
       />
-      <!-- <p *ngIf="login.errors?.appUserExist" class="red">
+      <p *ngIf="login.errors?.appLoginCheck" class="red">
               User name already exist. Please chose other.
-            </p> -->
+            </p>
       <p *ngIf="login.errors?.required && login.touched" class="red">
         This field is mandatory
       </p>
@@ -123,7 +124,7 @@
         #surname="ngModel"
         name="surname"
         required
-        pattern="[A-Za-z]+"
+        pattern="[A-Za-z\-]+"
       />
       <p *ngIf="surname.errors?.required && surname.touched" class="red">
         This field is mandatory
@@ -138,7 +139,7 @@
         #email="ngModel"
         name="email"
         required
-        pattern="^[A-Za-z0-9]\w+@[a-z0-9.\-]+\.[a-z]+$"
+        pattern="^[A-Za-z0-9]\w+@[a-z0-9.\-]+\.[a-z][a-z]+$"
       />
       <p *ngIf="email.errors?.required && email.touched" class="red">
         This field is mandatory
@@ -148,6 +149,7 @@
         type="submit"
         [disabled]="!createUser.valid || passwordAgain !== password.value"
         class="button"
+        
       >
         Create user
       </button>

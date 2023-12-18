@@ -12,6 +12,7 @@ import {
   MatDialogRef,
   MatDialog,
 } from '@angular/material/dialog';
+import { UsersListService } from 'src/app/services/users-list.service';
 
 @Component({
   selector: 'app-create-user',
@@ -20,9 +21,17 @@ import {
 })
 export class CreateUserComponent {
   passwordAgain:any="";
-  haveUser(){
-    
+
+  constructor(private dialogRef2: MatDialog,
+    private readonly usersService:UsersListService){}
+
+  haveUser(userInfo:NgForm){
+    this.usersService.createUser(userInfo.value)
+    this.dialogRef2.closeAll();
   }
 
-  
+  close(){
+    this.dialogRef2.closeAll();
+  }
+
 }

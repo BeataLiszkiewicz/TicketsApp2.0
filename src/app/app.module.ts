@@ -28,7 +28,8 @@ import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.compon
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { LettersSizeDirective } from './directives/letters-size.directive';
 import { ContainNumberDirective } from './directives/contain-number.directive';
-import { SpecialCharacterDirective } from './directives/special-character.directive'
+import { SpecialCharacterDirective } from './directives/special-character.directive';
+import { LoginCheckDirective } from './directives/login-check.directive'
 
 
 
@@ -49,7 +50,8 @@ import { SpecialCharacterDirective } from './directives/special-character.direct
     CreateUserComponent,
     LettersSizeDirective,
     ContainNumberDirective,
-    SpecialCharacterDirective
+    SpecialCharacterDirective,
+    LoginCheckDirective
   ],
   imports: [
     BrowserModule, 
