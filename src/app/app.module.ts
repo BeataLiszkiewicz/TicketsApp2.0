@@ -29,7 +29,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { LettersSizeDirective } from './directives/letters-size.directive';
 import { ContainNumberDirective } from './directives/contain-number.directive';
 import { SpecialCharacterDirective } from './directives/special-character.directive';
-import { LoginCheckDirective } from './directives/login-check.directive'
+import { LoginCheckDirective } from './directives/login-check.directive';
+import { LogInComponent } from './components/log-in/log-in.component'
 
 
 
@@ -51,7 +52,8 @@ import { LoginCheckDirective } from './directives/login-check.directive'
     LettersSizeDirective,
     ContainNumberDirective,
     SpecialCharacterDirective,
-    LoginCheckDirective
+    LoginCheckDirective,
+    LogInComponent
   ],
   imports: [
     BrowserModule, 

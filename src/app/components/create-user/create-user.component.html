@@ -4,7 +4,11 @@
     <div class="forButton" (click)="close()"><button>X</button></div>
   </div>
   <div class="userForm">
-    <form #createUser="ngForm" (ngSubmit)="haveUser(createUser)" class="createUser">
+    <form
+      #createUser="ngForm"
+      (ngSubmit)="haveUser(createUser)"
+      class="createUser"
+    >
       <label for="login">Login: </label>
       <input
         type="text"
@@ -16,8 +20,8 @@
         pattern="\w+"
       />
       <p *ngIf="login.errors?.appLoginCheck" class="red">
-              User name already exist. Please chose other.
-            </p>
+        User name already exist. Please chose other.
+      </p>
       <p *ngIf="login.errors?.required && login.touched" class="red">
         This field is mandatory
       </p>
@@ -58,33 +62,35 @@
         appSpecialCharacter
         required
       />
-      <p *ngIf="password.errors?.required && password.touched" class="red">
-        This field is mandatory
-      </p>
-      <p
-        *ngIf="password.dirty"
-        [ngClass]="[password.errors?.minlength ? 'red' : 'green']"
-      >
-        Password must be longer than 7 digits
-      </p>
-      <p
-        *ngIf="password.dirty"
-        [ngClass]="[password.errors?.appLettersSize ? 'red' : 'green']"
-      >
-        Password must contain uppercase and lowercase
-      </p>
-      <p
-        *ngIf="password.dirty"
-        [ngClass]="[password.errors?.appContainNumber ? 'red' : 'green']"
-      >
-        Password must contain at least one number
-      </p>
-      <p
-        *ngIf="password.dirty"
-        [ngClass]="[password.errors?.appSpecialCharacter ? 'red' : 'green']"
-      >
-        Password must contain special character
-      </p>
+      <ng-container *ngIf="password.errors">
+        <p *ngIf="password.errors.required && password.touched" class="red">
+          This field is mandatory
+        </p>
+        <p
+          *ngIf="password.dirty"
+          [ngClass]="[password.errors.minlength ? 'red' : 'green']"
+        >
+          Password must be longer than 7 digits
+        </p>
+        <p
+          *ngIf="password.dirty"
+          [ngClass]="[password.errors.appLettersSize ? 'red' : 'green']"
+        >
+          Password must contain uppercase and lowercase
+        </p>
+        <p
+          *ngIf="password.dirty"
+          [ngClass]="[password.errors.appContainNumber ? 'red' : 'green']"
+        >
+          Password must contain at least one number
+        </p>
+        <p
+          *ngIf="password.dirty"
+          [ngClass]="[password.errors.appSpecialCharacter ? 'red' : 'green']"
+        >
+          Password must contain special character
+        </p>
+      </ng-container>
 
       <ng-container *ngIf="password.dirty">
         <label>Repeat password:</label>
@@ -149,7 +155,6 @@
         type="submit"
         [disabled]="!createUser.valid || passwordAgain !== password.value"
         class="button"
-        
       >
         Create user
       </button>

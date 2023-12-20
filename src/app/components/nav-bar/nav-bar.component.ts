@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BookPlaneService } from 'src/app/services/book-plane.service';
 import { TicketPriceService } from 'src/app/services/ticket-price.service';
+import { UsersListService } from 'src/app/services/users-list.service';
+import { FlyChoiceComponent } from '../fly-choice/fly-choice.component';
+import { LogInComponent } from '../log-in/log-in.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +16,9 @@ export class NavBarComponent {
   clickToBook: boolean = false;
 
   constructor(private bookService: BookPlaneService,
-    private ticketService:TicketPriceService) {}
+    private ticketService:TicketPriceService,
+    private dialogRef: MatDialog,
+    private UserService:UsersListService) {}
 
   ngOnInit() {
     this.bookService.getHover().subscribe({
@@ -43,5 +49,41 @@ export class NavBarComponent {
 
   bookPlane() {
     this.bookService.setFlying('start');
+  }
+
+ 
+    openLogIn() {
+      if (this.UserService.oneUser.length > 0) {
+        this.dialogRef.open(FlyChoiceComponent, {
+          disableClose: false,
+          hasBackdrop: true,
+          backdropClass: '',
+          width: '90%',
+          height: '50%',
+          position: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+          },
+        });
+       
+      } else {
+        this.UserService.changeOnlyLogIn(true);
+        this.dialogRef.open(LogInComponent, {
+          disableClose: false,
+          hasBackdrop: true,
+          backdropClass: '',
+          width: '90%',
+          height: '',
+          position: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+          },
+        });
+      }
+    
   }
 }

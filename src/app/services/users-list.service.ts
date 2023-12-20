@@ -6,7 +6,10 @@ import { Observable, Subscriber, delay } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersListService {
-  
+
+  oneUser:User[]=[];
+  onlyLogIn:boolean=false;
+  temporaryUser:any;
   usersList:User[]=[];
   
   constructor() { }
@@ -28,5 +31,17 @@ export class UsersListService {
     const isFound = foundUser ? true : false;  return new Observable((observe: Subscriber<boolean>) => {
       observe.next(isFound);
     }).pipe(delay(500));
+  }
+
+  changeOnlyLogIn(param:boolean){
+    this.onlyLogIn=param
+  }
+
+  logIn(param:any){
+    this.oneUser=this.usersList.filter((el:any)=>el.login.toLowerCase()===param[0].toLowerCase()&&el.password===param[1]);
+  }
+
+  createTemporaryUser(param:any){
+    this.temporaryUser=param
   }
 }
