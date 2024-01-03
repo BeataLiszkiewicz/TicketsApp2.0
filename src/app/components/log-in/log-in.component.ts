@@ -44,6 +44,7 @@ export class LogInComponent {
 
       if (this.UserService.oneUser.length > 0) {
         this.incorrectLogin = false;
+        
         if (!this.onlyLogin) {
           this.router.navigate(['/summary']);
         }

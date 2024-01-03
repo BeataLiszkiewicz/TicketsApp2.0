@@ -102,7 +102,7 @@
         />
         <p
           class="red"
-          *ngIf="passwordAgain.dirty && password.value !== passwordAgain.value"
+          *ngIf="passwordAgain!=='' && password.value !== passwordAgain"
         >
           Passwords do not match
         </p>

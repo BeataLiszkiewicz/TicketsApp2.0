@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { PlaneService } from 'src/app/services/plane.service';
 import FlyDistance from '../../../assets/data/flyDistance.json';
 import { Subscription, fromEvent } from 'rxjs';
+import { UsersListService } from 'src/app/services/users-list.service';
 
 @Component({
   selector: 'app-summary',
@@ -18,6 +19,7 @@ export class SummaryComponent {
   distance!: any;
   extraLuggage!: number;
   extraLuggagePlus!: number;
+  firstPerson!:Array<string>;
   flyDistance!: any;
   openId!: number;
   planeVisible: boolean = false;
@@ -27,7 +29,8 @@ export class SummaryComponent {
     private bookService: BookPlaneService,
     private passengerService: PassengerService,
     private planeService: PlaneService,
-    private router: Router
+    private router: Router, 
+    private readonly userService:UsersListService
   ) {}
 
   @ViewChildren('seat') buttons!: QueryList<any>;
@@ -43,6 +46,16 @@ export class SummaryComponent {
     if (this.arrival) {
       this.distance = this.flyDistance[0][this.arrival];
     }
+
+    this.firstPerson=this.userService.getFirstperson();
+    this.allDetails.passengers[0].name=this.firstPerson[0];
+    this.allDetails.passengers[0].surname=this.firstPerson[1];
+    
+  
+  }
+
+  ngOnDestroy(){
+    this.passengerService.flightDetailsUpdate(this.allDetails);
   }
 
   go() {

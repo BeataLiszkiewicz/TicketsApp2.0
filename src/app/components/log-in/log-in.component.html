@@ -25,7 +25,7 @@
           ngModel
           #name="ngModel"
           minLength="1"
-          pattern="[A-Za-z-]+"
+          pattern="[A-Za-z]+"
           required
           name="name"
         />
@@ -37,7 +37,7 @@
           ngModel
           #surname="ngModel"
           minLength="1"
-          pattern="[A-Za-z]+"
+          pattern="[A-Za-z\-]+"
           required
           name="surname"
         />
@@ -49,7 +49,7 @@
           ngModel
           #email="ngModel"
           name="email"
-          pattern="^[A-Za-z0-9]\w+@[a-z0-9.-]+\.[a-z]+$"
+          pattern="^[A-Za-z0-9]\w+@[a-z0-9.\-]+\.[a-z][a-z]+$"
           required
         />
         <p *ngIf="email.errors?.pattern">Invalid email address</p>

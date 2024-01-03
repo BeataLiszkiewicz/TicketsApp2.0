@@ -19,7 +19,7 @@ export class LoginCheckDirective implements AsyncValidator{
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     return this.userService.checkLogin(control.value).pipe(
       take(1),
-      map((isTaken:any) => (isTaken ? { appUserExist: true } : null)),
+      map((isTaken:any) => (isTaken ? { appLoginCheck: true } : null)),
       catchError(() => of(null))
     );
     

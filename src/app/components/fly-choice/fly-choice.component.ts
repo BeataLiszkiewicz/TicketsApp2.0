@@ -13,6 +13,8 @@ import { PassengerSelectionComponent } from '../passenger-selection/passenger-se
 import { PassengerService } from 'src/app/services/passenger.service';
 import { TicketPriceService } from 'src/app/services/ticket-price.service';
 import { Router } from '@angular/router';
+import { UsersListService } from 'src/app/services/users-list.service';
+import { LogInComponent } from '../log-in/log-in.component';
 
 @Component({
   selector: 'app-fly-choice',
@@ -44,7 +46,8 @@ export class FlyChoiceComponent {
     private fromCalendarService: DataFromCalendarService,
     private passengerService: PassengerService,
     private ticketsService: TicketPriceService,
-    private router: Router
+    private router: Router,
+    private readonly userService:UsersListService
   ) {}
   ngOnInit() {
     this.bookService.setBookingButton(true);
@@ -201,8 +204,13 @@ export class FlyChoiceComponent {
   }
 
   buy() {
+    if (this.userService.oneUser.length>0){
+      this.router.navigate(['/summary'])
+    }else{
+      this.openLogIn()
+    }
     this.passengerService.createPassengersList();
-    this.router.navigate(['/summary'])
+    
   }
 
   openCalendar() {
@@ -244,6 +252,22 @@ export class FlyChoiceComponent {
         children: result.children,
         infants: result.infants,
       });
+    });
+  }
+
+  openLogIn(){
+    this.dialogRef.open(LogInComponent, {
+      disableClose: false,
+      hasBackdrop: true,
+      backdropClass: '',
+      width: '90%',
+      height: '',
+      position: {
+        top: '',
+        bottom: '',
+        left: '',
+        right: '',
+      },
     });
   }
 }

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Flight } from '../interfaces/flight';
 import { Passenger } from '../interfaces/flight';
 import { People } from '../interfaces/flight';
+import { UsersListService } from './users-list.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +24,11 @@ export class PassengerService {
     passengers: [],
   };
 
-  constructor() {}
+  loggedPerson:any='';
+
+  constructor(userService:UsersListService) {}
+
+  
 
   fillDetails(
     option: string,
@@ -73,7 +79,13 @@ export class PassengerService {
       });
     }
 
+
     this.flightDetails.month=this.flightDetails.date.getMonth();
     
   }
+
+ flightDetailsUpdate(newDetails:Flight){
+  this.flightDetails=newDetails
+  console.log(this.flightDetails)
+ }
 }
