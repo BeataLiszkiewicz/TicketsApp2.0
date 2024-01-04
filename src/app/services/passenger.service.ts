@@ -13,7 +13,7 @@ export class PassengerService {
     from: '',
     to: '',
     date: new Date(1999),
-    month:1,
+    month: 1,
     price: 0,
     currency: '',
     passengersTotal: {
@@ -24,11 +24,9 @@ export class PassengerService {
     passengers: [],
   };
 
-  loggedPerson:any='';
+  loggedPerson: any = '';
 
-  constructor(userService:UsersListService) {}
-
-  
+  constructor(userService: UsersListService) {}
 
   fillDetails(
     option: string,
@@ -53,7 +51,7 @@ export class PassengerService {
         ticketClass: 'Adult',
         seat: '',
         luggage: 0,
-        price:this.flightDetails.price
+        price: this.flightDetails.price,
       });
     }
 
@@ -64,7 +62,7 @@ export class PassengerService {
         ticketClass: 'Child',
         seat: '',
         luggage: 0,
-        price:Math.round(this.flightDetails.price*0.75)
+        price: Math.round(this.flightDetails.price * 0.75),
       });
     }
 
@@ -75,17 +73,31 @@ export class PassengerService {
         ticketClass: 'Infant',
         seat: '',
         luggage: 0,
-        price:0
+        price: 0,
       });
     }
 
-
-    this.flightDetails.month=this.flightDetails.date.getMonth();
-    
+    this.flightDetails.month = this.flightDetails.date.getMonth();
   }
 
- flightDetailsUpdate(newDetails:Flight){
-  this.flightDetails=newDetails
-  console.log(this.flightDetails)
- }
+  flightDetailsUpdate(newDetails: Flight) {
+    this.flightDetails = newDetails;
+  }
+
+  resetDetails() {
+    this.flightDetails = {
+      from: '',
+      to: '',
+      date: new Date(1999),
+      month: 1,
+      price: 0,
+      currency: '',
+      passengersTotal: {
+        adults: 0,
+        children: 0,
+        infants: 0,
+      },
+      passengers: [],
+    };
+  }
 }

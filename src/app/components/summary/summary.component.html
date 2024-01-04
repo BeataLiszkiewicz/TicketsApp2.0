@@ -6,7 +6,11 @@
       <p class="to">{{ allDetails.to }}</p>
     </div>
     <div class="date">
-      {{allDetails.date|date : "dd.MM.yyyy"}}
+      <p>{{ allDetails.date | date : "dd.MM.yyyy" }}</p>
+      <div class="totalCost">
+        <p>Total cost:</p>
+        <p class="costsItself">{{ totalCost }} {{ allDetails.currency }}</p>
+      </div>
     </div>
   </div>
   <div class="ticketsContainer">
@@ -16,12 +20,7 @@
     >
       <p class="ticketClass one">{{ person.ticketClass }}</p>
       <label for="name" class="one">Name:</label>
-      <input
-        type="text"
-        name="name"
-        class="two"
-        [(ngModel)]="person.name"
-      />
+      <input type="text" name="name" class="two" [(ngModel)]="person.name" />
 
       <label for="surname" class="one">Surname</label>
       <input
@@ -30,99 +29,152 @@
         class="two"
         [(ngModel)]="person.surname"
       />
-    <ng-container *ngIf="person.ticketClass!=='Infant'">
-      <label for="seat" class="one">Seat:</label>
-      <input
-        type="text"
-        name="seat"
+      <ng-container *ngIf="person.ticketClass !== 'Infant'">
+        <label for="seat" class="one">Seat:</label>
+        <input
+          type="text"
+          name="seat"
+          class="two"
+          [(ngModel)]="person.seat"
+          (focus)="choseSeat(i)"
+        />
+      </ng-container>
+      <label for="luggage" class="one">Luggage:</label>
+      <select
+        name="luggage"
+        id="luggage"
         class="two"
-        [(ngModel)]="person.seat"
-        (focus)="choseSeat(i)"
-      />
-    </ng-container>
-      <label
-        for="luggage"
-        class="one"
-        >Luggage:</label
+        [(ngModel)]="allDetails.passengers[i].luggage"
+        (change)="addCost()"
       >
-      <select name="luggage" id="" class="two" [(ngModel)]="allDetails.passengers[i].luggage">
-        <option value=0>Carry-on baggage only</option>
-        <option value={{extraLuggage}}>Checked baggage +{{extraLuggage}} {{allDetails.currency}}</option>
-        <option value={{extraLuggagePlus}}>Checked baggage plus small bag +{{extraLuggagePlus}} {{allDetails.currency}}</option>
+        <option value="0">Carry-on baggage only</option>
+        <option value="{{ extraLuggage }}">
+          Checked baggage +{{ extraLuggage }} {{ allDetails.currency }}
+        </option>
+        <option value="{{ extraLuggagePlus }}">
+          Checked baggage plus small bag +{{ extraLuggagePlus }}
+          {{ allDetails.currency }}
+        </option>
       </select>
 
-      <p class="personCost" *ngIf="person.price!==0||person.luggage!==0">{{person.price*1 + person.luggage*1}} {{allDetails.currency}}</p>
+      <p class="personCost" *ngIf="person.price !== 0 || person.luggage !== 0">
+        {{ person.price * 1 + person.luggage * 1 }} {{ allDetails.currency }}
+      </p>
     </div>
     <button (click)="go()"></button>
   </div>
 </div>
 
 <mat-sidenav-container class="planeSidenav">
-    <mat-sidenav mode="side" [opened]="planeVisible===true">
-        <div class="planeContainer">
-            <div class="plane">
-              <div class="seatsContainer" *ngIf="distance === 'short'; else biggerPlane">
-                <ng-container *ngFor="let _ of [].constructor(20); let i = index">
-                  <button
-                    class="columnA seat"
-                    value="{{ i + 1 }}A"
-                    id="seat{{ i + 1 }}A"
-                    name="clear"
-                    (click)="seatClicked()"
-                  >
-                    {{ i + 1 }}A
-                  </button>
-                  <button class="columnB seat" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
-                    {{ i + 1 }}B
-                  </button>
-                  <button class="columnC seat" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
-                    {{ i + 1 }}C
-                  </button>
-                  <button class="columnD seat" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
-                    {{ i + 1 }}D
-                  </button>
-                </ng-container>
-              </div>
-              <ng-template #biggerPlane>
-                <div [ngClass]="[distance === 'mid' ? 'seats' : 'moreRows']">
-                  <ng-container *ngFor="let _ of [].constructor(36); let i = index">
-                    <button class="columnA seat" value="{{ i + 1 }}A" id="{{ i + 1 }}A" name="clear" (click)="seatClicked()">
-                      {{ i + 1 }}A
-                    </button>
-                    <button class="columnB seat" value="{{ i + 1 }}B" id="{{ i + 1 }}B" name="clear" (click)="seatClicked()">
-                      {{ i + 1 }}B
-                    </button>
-                    <button class="columnC seat" value="{{ i + 1 }}C" id="{{ i + 1 }}C" name="clear" (click)="seatClicked()">
-                      {{ i + 1 }}C
-                    </button>
-                    <button class="columnD seat" value="{{ i + 1 }}D" id="{{ i + 1 }}D" name="clear" (click)="seatClicked()">
-                      {{ i + 1 }}D
-                    </button>
-                    <button
-                      class="columnE seat"
-                      value="{{ i + 1 }}E"
-                      id="{{ i + 1 }}E"
-                      name="clear"
-                      *ngIf="distance === 'long'"
-                      (click)="seatClicked()"
-                    >
-                      {{ i + 1 }}E
-                    </button>
-                    <button
-                      class="columnF seat"
-                      value="{{ i + 1 }}F"
-                      id="{{ i + 1 }}F"
-                      name="clear"
-                      *ngIf="distance === 'long'"
-                      (click)="seatClicked()"
-                    >
-                      {{ i + 1 }}F
-                    </button>
-                  </ng-container>
-                </div>
-              </ng-template>
-            </div>
+  <mat-sidenav mode="side" [opened]="planeVisible === true">
+    <div class="planeContainer">
+      <div class="plane">
+        <div
+          class="seatsContainer"
+          *ngIf="distance === 'short'; else biggerPlane"
+        >
+          <ng-container *ngFor="let _ of [].constructor(20); let i = index">
+            <button
+              class="columnA seat"
+              value="{{ i + 1 }}A"
+              id="seat{{ i + 1 }}A"
+              name="clear"
+              (click)="seatClicked()"
+            >
+              {{ i + 1 }}A
+            </button>
+            <button
+              class="columnB seat"
+              value="{{ i + 1 }}B"
+              id="{{ i + 1 }}B"
+              name="clear"
+              (click)="seatClicked()"
+            >
+              {{ i + 1 }}B
+            </button>
+            <button
+              class="columnC seat"
+              value="{{ i + 1 }}C"
+              id="{{ i + 1 }}C"
+              name="clear"
+              (click)="seatClicked()"
+            >
+              {{ i + 1 }}C
+            </button>
+            <button
+              class="columnD seat"
+              value="{{ i + 1 }}D"
+              id="{{ i + 1 }}D"
+              name="clear"
+              (click)="seatClicked()"
+            >
+              {{ i + 1 }}D
+            </button>
+          </ng-container>
+        </div>
+        <ng-template #biggerPlane>
+          <div [ngClass]="[distance === 'mid' ? 'seats' : 'moreRows']">
+            <ng-container *ngFor="let _ of [].constructor(36); let i = index">
+              <button
+                class="columnA seat"
+                value="{{ i + 1 }}A"
+                id="{{ i + 1 }}A"
+                name="clear"
+                (click)="seatClicked()"
+              >
+                {{ i + 1 }}A
+              </button>
+              <button
+                class="columnB seat"
+                value="{{ i + 1 }}B"
+                id="{{ i + 1 }}B"
+                name="clear"
+                (click)="seatClicked()"
+              >
+                {{ i + 1 }}B
+              </button>
+              <button
+                class="columnC seat"
+                value="{{ i + 1 }}C"
+                id="{{ i + 1 }}C"
+                name="clear"
+                (click)="seatClicked()"
+              >
+                {{ i + 1 }}C
+              </button>
+              <button
+                class="columnD seat"
+                value="{{ i + 1 }}D"
+                id="{{ i + 1 }}D"
+                name="clear"
+                (click)="seatClicked()"
+              >
+                {{ i + 1 }}D
+              </button>
+              <button
+                class="columnE seat"
+                value="{{ i + 1 }}E"
+                id="{{ i + 1 }}E"
+                name="clear"
+                *ngIf="distance === 'long'"
+                (click)="seatClicked()"
+              >
+                {{ i + 1 }}E
+              </button>
+              <button
+                class="columnF seat"
+                value="{{ i + 1 }}F"
+                id="{{ i + 1 }}F"
+                name="clear"
+                *ngIf="distance === 'long'"
+                (click)="seatClicked()"
+              >
+                {{ i + 1 }}F
+              </button>
+            </ng-container>
           </div>
-            
-    </mat-sidenav>
+        </ng-template>
+      </div>
+    </div>
+  </mat-sidenav>
 </mat-sidenav-container>

@@ -19,18 +19,19 @@ export class SummaryComponent {
   distance!: any;
   extraLuggage!: number;
   extraLuggagePlus!: number;
-  firstPerson!:Array<string>;
+  firstPerson!: Array<string>;
   flyDistance!: any;
   openId!: number;
   planeVisible: boolean = false;
   seatSubscription!: Subscription;
+  totalCost: number = 0;
 
   constructor(
     private bookService: BookPlaneService,
     private passengerService: PassengerService,
     private planeService: PlaneService,
-    private router: Router, 
-    private readonly userService:UsersListService
+    private router: Router,
+    private readonly userService: UsersListService
   ) {}
 
   @ViewChildren('seat') buttons!: QueryList<any>;
@@ -47,14 +48,14 @@ export class SummaryComponent {
       this.distance = this.flyDistance[0][this.arrival];
     }
 
-    this.firstPerson=this.userService.getFirstperson();
-    this.allDetails.passengers[0].name=this.firstPerson[0];
-    this.allDetails.passengers[0].surname=this.firstPerson[1];
-    
-  
+    this.firstPerson = this.userService.getFirstperson();
+    this.allDetails.passengers[0].name = this.firstPerson[0];
+    this.allDetails.passengers[0].surname = this.firstPerson[1];
+
+    this.calculateTotalCost('first');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.passengerService.flightDetailsUpdate(this.allDetails);
   }
 
@@ -117,5 +118,17 @@ export class SummaryComponent {
         this.seatSubscription!.unsubscribe();
       }
     }, 10);
+  }
+
+  addCost() {
+    this.calculateTotalCost('optional');
+  }
+
+  calculateTotalCost(option: string) {
+    this.totalCost = 0;
+    for (let i = 0; i < this.allDetails.passengers.length; i++) {
+      this.totalCost += this.allDetails.passengers[i].price;
+      this.totalCost += Number(this.allDetails.passengers[i].luggage);
+    }
   }
 }

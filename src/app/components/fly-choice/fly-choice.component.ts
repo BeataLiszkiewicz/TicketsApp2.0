@@ -57,6 +57,7 @@ export class FlyChoiceComponent {
       ...this.availableArrivals,
       ...this.availableDepartures,
     ];
+    this.passengerService.resetDetails()
   }
 
   setAirports() {
