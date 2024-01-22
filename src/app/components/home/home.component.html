@@ -57,7 +57,11 @@
     <span id="city">{{ cityName }}</span>
   </div>
 </div>
-
+<div class="goUp" (click)="goUp()">
+  <button mat-fab color="warn">
+    <mat-icon fontIcon="arrow_upward"></mat-icon>
+  </button>
+</div>
 <div class="food page" #foodMenu>
   <div class="menuPage">
     <h1 class="menu">THIS WEEK MENU</h1>

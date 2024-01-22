@@ -68,7 +68,8 @@ export class LogInComponent {
       autoFocus: false,
       hasBackdrop: true,
       backdropClass: '',
-      maxWidth: '100vw',
+      width: '90vw',
+      maxWidth:'576px',
       height: '',
       position: {
         top: '',

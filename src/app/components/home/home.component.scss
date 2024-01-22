@@ -192,6 +192,12 @@ h2 {
   margin: 10vh auto;
 }
 
+.goUp{
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 .destinationBackground {
   background-color: $background-primary;
   height: 90vh;

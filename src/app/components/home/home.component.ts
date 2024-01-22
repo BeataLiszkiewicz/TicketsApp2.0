@@ -59,6 +59,9 @@ export class HomeComponent {
   placePictureAgain: string = 'assets/pictures/Antalya.jpg';
   planeMenu!: Menu[];
 
+  @ViewChild('homeContainer', {static:true})
+  homeContainer!:ElementRef;
+
   @ViewChild('destinationBackground', { static: true })
   destinationBackground!: ElementRef;
 
@@ -94,6 +97,9 @@ export class HomeComponent {
       },
       error: (err: any) => console.log(err),
     });
+
+    
+    
   }
 
   ngOnDestroy(){
@@ -106,7 +112,7 @@ export class HomeComponent {
     this.intervalSubscription = fromEvent(window, 'scroll').subscribe({
       next: (res: any) => {
         this.picturePosition =
-          this.destinationBackground.nativeElement.getBoundingClientRect().top;
+          this.homeContainer.nativeElement.getBoundingClientRect().top;
 
         if (
           !this.intervalWorks &&
@@ -202,5 +208,9 @@ export class HomeComponent {
     setTimeout(() => {
       this.router.navigate(['/flyChoice']);
     }, 2200);
+  }
+
+  goUp(){
+    this.homeContainer.nativeElement.scrollIntoView();
   }
 }

@@ -99,5 +99,7 @@ export class PassengerService {
       },
       passengers: [],
     };
+
+    console.log(this.flightDetails)
   }
 }

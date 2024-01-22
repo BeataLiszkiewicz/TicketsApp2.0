@@ -31,8 +31,6 @@ export class UsersListService {
     return new Observable((observe: Subscriber<boolean>) => {
       observe.next(isFound);
     }).pipe(delay(500));
-
-    
   }
 
   changeOnlyLogIn(param: boolean) {
@@ -45,17 +43,10 @@ export class UsersListService {
         el.login.toLowerCase() === param[0].toLowerCase() &&
         el.password === param[1]
     );
-    console.log(
-      'one user:',
-      this.oneUser,
-      'temporary user:',
-      this.temporaryUser
-    );
   }
 
   createTemporaryUser(param: any) {
     this.temporaryUser = param;
-    console.log(this.temporaryUser);
   }
 
   getFirstperson(): string[] {

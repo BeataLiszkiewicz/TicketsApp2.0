@@ -58,8 +58,9 @@ export class NavBarComponent {
           disableClose: false,
           hasBackdrop: true,
           backdropClass: '',
-          width: '90%',
-          height: '50%',
+          width: '90vw',
+          maxWidth:'576px',
+          height: '',
           position: {
             top: '',
             bottom: '',
@@ -74,7 +75,8 @@ export class NavBarComponent {
           disableClose: false,
           hasBackdrop: true,
           backdropClass: '',
-          width: '90%',
+          width: '90vw',
+          maxWidth:'576px',
           height: '',
           position: {
             top: '',

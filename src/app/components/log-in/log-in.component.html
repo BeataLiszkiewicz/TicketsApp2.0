@@ -16,7 +16,7 @@
       </p>
     </div>
     <div class="withoutAccount" [hidden]="onlyLogin">
-      <p>To continue without login in, plese fill in form below</p>
+      <p class="fillIn">To continue without login in, plese fill in form below</p>
       <form #withoutAccount="ngForm" class="noAccount">
         <label for="name">Name:</label>
         <input
@@ -66,5 +66,6 @@
     <p *ngIf="incorrectdata" class="empty">
       Form contains incorrect information or some information is missing
     </p>
+    
   </div>
   
