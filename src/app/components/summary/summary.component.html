@@ -14,54 +14,63 @@
     </div>
   </div>
   <div class="ticketsContainer">
-    <div
-      class="passenger"
-      *ngFor="let person of allDetails.passengers; index as i"
-    >
-      <p class="ticketClass one">{{ person.ticketClass }}</p>
-      <label for="name" class="one">Name:</label>
-      <input type="text" name="name" class="two" [(ngModel)]="person.name" />
+    <form #fillAllDetails="ngForm">
+      <div
+        class="passenger"
+        *ngFor="let person of allDetails.passengers; index as i"
+      >
+        <p class="ticketClass one">{{ person.ticketClass }}</p>
+        <label for="name" class="one">Name:</label>
+        <input type="text" name="name" class="two" [(ngModel)]="person.name" required/>
 
-      <label for="surname" class="one">Surname</label>
-      <input
-        type="text"
-        name="surname"
-        class="two"
-        [(ngModel)]="person.surname"
-      />
-      <ng-container *ngIf="person.ticketClass !== 'Infant'">
-        <label for="seat" class="one">Seat:</label>
+        <label for="surname" class="one">Surname</label>
         <input
           type="text"
-          name="seat"
+          name="surname"
           class="two"
-          [(ngModel)]="person.seat"
-          (focus)="choseSeat(i)"
+          [(ngModel)]="person.surname"
+          required
         />
-      </ng-container>
-      <label for="luggage" class="one">Luggage:</label>
-      <select
-        name="luggage"
-        id="luggage"
-        class="two"
-        [(ngModel)]="allDetails.passengers[i].luggage"
-        (change)="addCost()"
-      >
-        <option value="0">Carry-on baggage only</option>
-        <option value="{{ extraLuggage }}">
-          Checked baggage +{{ extraLuggage }} {{ allDetails.currency }}
-        </option>
-        <option value="{{ extraLuggagePlus }}">
-          Checked baggage plus small bag +{{ extraLuggagePlus }}
-          {{ allDetails.currency }}
-        </option>
-      </select>
+        <ng-container *ngIf="person.ticketClass !== 'Infant'">
+          <label for="seat" class="one">Seat:</label>
+          <input
+            type="text"
+            name="seat"
+            class="two"
+            [(ngModel)]="person.seat"
+            (focus)="choseSeat(i)"
+            required
+          />
+        </ng-container>
+        <label for="luggage" class="one">Luggage:</label>
+        <select
+          name="luggage"
+          id="luggage"
+          class="two"
+          [(ngModel)]="allDetails.passengers[i].luggage"
+          (change)="addCost()"
+          required
+        >
+          <option value="0">Carry-on baggage only</option>
+          <option value="{{ extraLuggage }}">
+            Checked baggage +{{ extraLuggage }} {{ allDetails.currency }}
+          </option>
+          <option value="{{ extraLuggagePlus }}">
+            Checked baggage plus small bag +{{ extraLuggagePlus }}
+            {{ allDetails.currency }}
+          </option>
+        </select>
 
-      <p class="personCost" *ngIf="person.price !== 0 || person.luggage !== 0">
-        {{ person.price * 1 + person.luggage * 1 }} {{ allDetails.currency }}
-      </p>
-    </div>
-    <button (click)="go()"></button>
+        <p
+          class="personCost"
+          *ngIf="person.price !== 0 || person.luggage !== 0"
+        >
+          {{ person.price * 1 + person.luggage * 1 }} {{ allDetails.currency }}
+        </p>
+      </div>
+    </form>
+
+    <button [disabled]="!fillAllDetails.valid" (click)="go()" class="finalized">BOOK AND PAY</button>
   </div>
 </div>
 

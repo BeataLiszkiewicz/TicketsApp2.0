@@ -18,6 +18,7 @@
         appLoginCheck
         minlength="5"
         pattern="\w+"
+        required
       />
       <p *ngIf="login.errors?.appLoginCheck" class="red">
         User name already exist. Please chose other.

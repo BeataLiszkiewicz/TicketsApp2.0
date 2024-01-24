@@ -44,6 +44,7 @@ export class PassengerService {
   }
 
   createPassengersList() {
+    
     for (let i = 0; i < this.flightDetails.passengersTotal.adults; i++) {
       this.flightDetails.passengers.push({
         name: '',
@@ -81,6 +82,7 @@ export class PassengerService {
   }
 
   flightDetailsUpdate(newDetails: Flight) {
+    this.resetDetails();
     this.flightDetails = newDetails;
   }
 
@@ -100,6 +102,6 @@ export class PassengerService {
       passengers: [],
     };
 
-    console.log(this.flightDetails)
+    
   }
 }

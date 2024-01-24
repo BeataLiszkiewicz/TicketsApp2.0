@@ -8,7 +8,7 @@
 
 .summaryPage {
   padding-top: 6rem;
-  width: 100vw;
+  width: 100%;
 
   .summary {
     display: grid;
@@ -96,12 +96,18 @@
       }
     }
   }
-
-  button {
+  .finalized{
+    @include buttonStandard();
+    position: fixed;
     height: 3rem;
-    width: 5rem;
+    width: 40vw;
+    top: 0.5rem;
+    left: 40vw;
+    
   }
 }
+
+
 @mixin fourColumns {
     grid-template-columns: 1rem repeat(5, 1fr) 1rem;
     .columnA {

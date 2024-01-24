@@ -31,7 +31,7 @@
       }
       p {
         grid-column: 1 / span 2;
-        color: red;
+        color: $background-warn;
         text-align: center;
       }
     }

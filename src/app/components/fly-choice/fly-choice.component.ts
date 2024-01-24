@@ -15,6 +15,7 @@ import { TicketPriceService } from 'src/app/services/ticket-price.service';
 import { Router } from '@angular/router';
 import { UsersListService } from 'src/app/services/users-list.service';
 import { LogInComponent } from '../log-in/log-in.component';
+import { DataFromCalendar } from 'src/app/interfaces/data-from-calendar';
 
 @Component({
   selector: 'app-fly-choice',
@@ -30,7 +31,7 @@ export class FlyChoiceComponent {
   availableDepartures: string[] = [];
   clearCalendar: boolean = false;
   dailyWeatherForecast: any = [];
-  dataFromCalendar: any;
+  dataFromCalendar!: DataFromCalendar;
   departure: string = '';
   oneAirport!: ALLAirports | undefined;
   passengersNumber: number = 0;
@@ -57,7 +58,13 @@ export class FlyChoiceComponent {
       ...this.availableArrivals,
       ...this.availableDepartures,
     ];
-    this.passengerService.resetDetails()
+    this.dataFromCalendar={
+      departureDate:undefined,
+      price:0,
+      currency:''
+
+    }
+    
   }
 
   setAirports() {

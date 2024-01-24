@@ -9,6 +9,7 @@
 
 .nav-bar{
     display: grid;
+    width: 99vw;
     grid-template-columns: 20% 1fr 20%;
     height: 5rem;
     background-color: rgba($background-neutral,0.7);
