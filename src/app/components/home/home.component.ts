@@ -58,9 +58,14 @@ export class HomeComponent {
   placePicture: string = 'assets/pictures/Antalya.jpg';
   placePictureAgain: string = 'assets/pictures/Antalya.jpg';
   planeMenu!: Menu[];
+  screenSize!:number;
+  upArrowVisible:boolean=false;
 
   @ViewChild('homeContainer', {static:true})
   homeContainer!:ElementRef;
+
+  @ViewChild('upArrow', {static:true})
+  upArrow!:ElementRef;
 
   @ViewChild('destinationBackground', { static: true })
   destinationBackground!: ElementRef;
@@ -98,7 +103,7 @@ export class HomeComponent {
       error: (err: any) => console.log(err),
     });
 
-    
+    this.screenSize=this.homeContainer.nativeElement.getBoundingClientRect().bottom-this.homeContainer.nativeElement.getBoundingClientRect().top
     
   }
 
@@ -113,11 +118,17 @@ export class HomeComponent {
       next: (res: any) => {
         this.picturePosition =
           this.homeContainer.nativeElement.getBoundingClientRect().top;
+          
+        if (this.picturePosition===0){
+          this.upArrowVisible=false
+        }else{
+          this.upArrowVisible=true
+        }  
 
         if (
           !this.intervalWorks &&
-          this.picturePosition < 500 &&
-          this.picturePosition > -800
+          this.picturePosition < -this.screenSize &&
+          this.picturePosition > -((this.screenSize+40)*2)
         ) {
           this.interval = setInterval(() => {
             this.cityName = '';
@@ -145,7 +156,7 @@ export class HomeComponent {
           this.intervalWorks = true;
         } else if (
           this.intervalWorks &&
-          (this.picturePosition > 500 || this.picturePosition < -800)
+          (this.picturePosition > -this.screenSize || this.picturePosition < -((this.screenSize+40)*2))
         ) {
           clearInterval(this.interval);
           this.interval = null;

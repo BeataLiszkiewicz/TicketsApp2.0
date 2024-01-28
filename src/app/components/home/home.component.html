@@ -57,7 +57,7 @@
     <span id="city">{{ cityName }}</span>
   </div>
 </div>
-<div class="goUp" (click)="goUp()">
+<div *ngIf="upArrowVisible" class="goUp" #upArrow (click)="goUp()">
   <button mat-fab color="warn">
     <mat-icon fontIcon="arrow_upward"></mat-icon>
   </button>
