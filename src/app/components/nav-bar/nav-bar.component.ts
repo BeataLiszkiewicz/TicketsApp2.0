@@ -53,7 +53,7 @@ export class NavBarComponent {
 
     setTimeout(()=>{
       this.bookService.setFlying('');
-    }, 200)
+    }, 20)
   }
 
  

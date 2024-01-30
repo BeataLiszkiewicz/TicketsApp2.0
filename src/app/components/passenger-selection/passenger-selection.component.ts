@@ -22,11 +22,6 @@ export class PassengerSelectionComponent {
   ngOnInit() {
     this.passengers = this.passengerService.getOptionDetails('passengersTotal');
 
-    if (this.passengers.adults > 0 || this.passengers.children > 0) {
-      this.adults = this.passengers.adults;
-      this.child = this.passengers.children;
-      this.infants = this.passengers.infants;
-    }
   }
 
   changeAdult(param: number) {

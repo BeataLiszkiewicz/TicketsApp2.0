@@ -23,6 +23,7 @@
 
       p {
         @include flexCenter();
+        
       }
 
       .from {
@@ -30,7 +31,10 @@
       }
 
       .plane {
-        transform: scale(3);
+        .iconItself{
+          transform: scale(3);
+        }
+        
       }
 
       .to {

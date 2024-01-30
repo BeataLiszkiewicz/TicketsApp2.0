@@ -192,7 +192,7 @@ h2 {
   margin: 10vh auto;
 }
 
-.goUp{
+.goUp {
   position: fixed;
   z-index: 99;
   bottom: 1rem;
@@ -278,7 +278,6 @@ h2 {
     font-size: 6vmax;
   }
   .crewContainer {
-    height: 60vh;
     width: 90vw;
   }
   .mat-button-toggle-appearance-standard {
@@ -296,6 +295,7 @@ h2 {
     @include flexCenter();
     flex-direction: row;
     border: none;
+    margin-bottom: 1rem;
   }
 }
 
