@@ -54,6 +54,7 @@ export class HomeComponent {
   interval: any;
   intervalWorks: boolean = false;
   intervalSubscription: Subscription = new Subscription();
+  nextPageDelay:number=2200;
   picturePosition!: number;
   placePicture: string = 'assets/pictures/Antalya.jpg';
   placePictureAgain: string = 'assets/pictures/Antalya.jpg';
@@ -82,6 +83,7 @@ export class HomeComponent {
   constructor(private bookService: BookPlaneService, private router: Router) {}
 
   ngOnInit() {
+    
     this.bookService.setBookingButton(false)
     this.changeCityBackground();
     this.cityList = listOfCities;
@@ -109,8 +111,9 @@ export class HomeComponent {
 
   ngOnDestroy(){
     this.bookService.setBookingButton(true)
-    this.flyStart='';
+    
     this.clickToBook = false;
+    
   }
 
   changeCityBackground() {
@@ -125,20 +128,24 @@ export class HomeComponent {
           this.upArrowVisible=true
         }  
 
+        if(this.picturePosition<-(this.screenSize/2)){
+          this.nextPageDelay=10
+        }else{
+          this.nextPageDelay=2200
+        }
+
         if (
           !this.intervalWorks &&
           this.picturePosition < -this.screenSize &&
           this.picturePosition > -((this.screenSize+40)*2)
         ) {
           this.interval = setInterval(() => {
-            this.cityName = '';
+            
             this.placePicture = `assets/pictures/${
               this.cityList[this.cityNumber].picture
             }.jpg`;
 
-            setTimeout(() => {
-              this.cityName = this.cityList[this.cityNumber].city;
-            }, 1500);
+            
 
             setTimeout(() => {
               this.placePictureAgain = `assets/pictures/${
@@ -150,8 +157,8 @@ export class HomeComponent {
               } else {
                 this.cityNumber += 1;
               }
-            }, 2500);
-          }, 4000);
+            }, 1500);
+          }, 3000);
 
           this.intervalWorks = true;
         } else if (
@@ -218,7 +225,7 @@ export class HomeComponent {
     }, 800);
     setTimeout(() => {
       this.router.navigate(['/flyChoice']);
-    }, 2200);
+    }, this.nextPageDelay);
   }
 
   goUp(){

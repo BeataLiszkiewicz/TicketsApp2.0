@@ -33,6 +33,7 @@ export class NavBarComponent {
       },
       error: (err: any) => console.log(err),
     });
+    
 
     this.ticketService.createPriceList();
   }
@@ -49,6 +50,10 @@ export class NavBarComponent {
 
   bookPlane() {
     this.bookService.setFlying('start');
+
+    setTimeout(()=>{
+      this.bookService.setFlying('');
+    }, 200)
   }
 
  

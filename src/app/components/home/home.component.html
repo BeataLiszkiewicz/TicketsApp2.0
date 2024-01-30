@@ -44,17 +44,16 @@
     class="destinations page"
     [ngStyle]="{
       background:
-        'url(' + placePictureAgain + ') no-repeat center center/ cover'
+        'url(' + placePictureAgain + ') no-repeat right center/ cover'
     }"
   >
     <div
       [ngStyle]="{
-        background: 'url(' + placePicture + ') no-repeat center center/ cover'
+        background: 'url(' + placePicture + ') no-repeat right center/ cover'
       }"
       class="secondBackground"
     ></div>
 
-    <span id="city">{{ cityName }}</span>
   </div>
 </div>
 <div *ngIf="upArrowVisible" class="goUp" #upArrow (click)="goUp()">

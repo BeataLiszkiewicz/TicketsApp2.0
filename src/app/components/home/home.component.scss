@@ -194,6 +194,7 @@ h2 {
 
 .goUp{
   position: fixed;
+  z-index: 99;
   bottom: 1rem;
   right: 1rem;
 }
