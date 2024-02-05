@@ -79,6 +79,10 @@ export class PassengerService {
     }
 
     this.flightDetails.month = this.flightDetails.date.getMonth();
+    this.flightDetails.passengersTotal.infants=0;
+    this.flightDetails.passengersTotal.children=0;
+    this.flightDetails.passengersTotal.adults=0;
+
   }
 
   flightDetailsUpdate(newDetails: Flight) {

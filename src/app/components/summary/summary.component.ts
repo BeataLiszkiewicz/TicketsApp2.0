@@ -53,6 +53,7 @@ export class SummaryComponent {
     this.allDetails.passengers[0].surname = this.firstPerson[1];
 
     this.calculateTotalCost('first');
+    console.log(this.allDetails)
   }
 
   ngOnDestroy() {
@@ -83,14 +84,14 @@ export class SummaryComponent {
   choseSeat(position: number) {
     this.planeVisible = true;
     this.openId = position;
-
+    console.log(position)
     this.seatSubscription = fromEvent(
       document.getElementsByClassName('seat'),
       'click'
     ).subscribe({
       next: (el: any) => {
         this.allDetails.passengers[position].seat = el.target.innerHTML;
-
+        
         if (el.target.name === 'clear') {
           el.target.name = 'checked';
         } else {

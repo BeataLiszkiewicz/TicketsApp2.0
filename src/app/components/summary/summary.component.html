@@ -2,7 +2,9 @@
   <div class="summary">
     <div class="direction">
       <p class="from">{{ allDetails.from }}</p>
-      <p class="plane"><mat-icon class="iconItself" fontIcon="flight_takeoff"></mat-icon></p>
+      <p class="plane">
+        <mat-icon class="iconItself" fontIcon="flight_takeoff"></mat-icon>
+      </p>
       <p class="to">{{ allDetails.to }}</p>
     </div>
     <div class="date">
@@ -21,7 +23,13 @@
       >
         <p class="ticketClass one">{{ person.ticketClass }}</p>
         <label for="name" class="one">Name:</label>
-        <input type="text" name="name" class="two" [(ngModel)]="person.name" required/>
+        <input
+          type="text"
+          name="name"
+          class="two"
+          [(ngModel)]="person.name"
+          required
+        />
 
         <label for="surname" class="one">Surname</label>
         <input
@@ -37,7 +45,8 @@
             type="text"
             name="seat"
             class="two"
-            [(ngModel)]="person.seat"
+            value="allDetails.passengers[i].seat"
+            [(ngModel)]="allDetails.passengers[i].seat"
             (focus)="choseSeat(i)"
             required
           />

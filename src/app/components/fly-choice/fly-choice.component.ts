@@ -52,6 +52,7 @@ export class FlyChoiceComponent {
   ) {}
   ngOnInit() {
     this.bookService.setBookingButton(true);
+    this.passengerService.resetDetails();
     this.allAirportsArray = Airports;
     this.setAirports();
     this.airportsList = [
