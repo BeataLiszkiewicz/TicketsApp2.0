@@ -49,11 +49,11 @@ export class SummaryComponent {
     }
 
     this.firstPerson = this.userService.getFirstperson();
-    this.allDetails.passengers[0].name = this.firstPerson[0];
-    this.allDetails.passengers[0].surname = this.firstPerson[1];
+    // this.allDetails.passengers[0].name = this.firstPerson[0];
+    // this.allDetails.passengers[0].surname = this.firstPerson[1];
 
     this.calculateTotalCost('first');
-    console.log(this.allDetails)
+    
   }
 
   ngOnDestroy() {

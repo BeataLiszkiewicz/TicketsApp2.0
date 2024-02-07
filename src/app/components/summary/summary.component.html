@@ -27,6 +27,7 @@
           type="text"
           name="name"
           class="two"
+          [value]="allDetails.passengers[i].name"
           [(ngModel)]="person.name"
           required
         />
@@ -36,6 +37,7 @@
           type="text"
           name="surname"
           class="two"
+          [value]="allDetails.passengers[i].surname"
           [(ngModel)]="person.surname"
           required
         />
@@ -45,8 +47,7 @@
             type="text"
             name="seat"
             class="two"
-            value="allDetails.passengers[i].seat"
-            [(ngModel)]="allDetails.passengers[i].seat"
+            [value]="allDetails.passengers[i].seat"
             (focus)="choseSeat(i)"
             required
           />
@@ -79,7 +80,9 @@
       </div>
     </form>
 
-    <button [disabled]="!fillAllDetails.valid" (click)="go()" class="finalized">BOOK AND PAY</button>
+    <button (click)="go()" class="finalized" [disabled]="!fillAllDetails.valid">
+      BOOK AND PAY
+    </button>
   </div>
 </div>
 

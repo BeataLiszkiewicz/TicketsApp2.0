@@ -102,12 +102,18 @@
   }
   .finalized{
     @include buttonStandard();
+    background-color: $background-warn;
+    color:$background-neutral-light;
     position: fixed;
     height: 3rem;
     width: 40vw;
     top: 0.5rem;
     left: 40vw;
     z-index: 99;
+
+    &:disabled{
+      background-color: gray;
+    }
     
   }
 }
