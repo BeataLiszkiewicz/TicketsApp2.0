@@ -39,6 +39,9 @@ export class SummaryComponent {
   ngOnInit() {
     this.bookService.setBookingButton(true);
     this.allDetails = this.passengerService.returnDetails();
+    this.firstPerson = this.userService.getFirstperson();
+    this.allDetails.passengers[0].name = this.firstPerson[0];
+    this.allDetails.passengers[0].surname = this.firstPerson[1];
     this.availableLuggageType();
 
     this.arrival = this.passengerService.getOptionDetails('to');
@@ -48,12 +51,7 @@ export class SummaryComponent {
       this.distance = this.flyDistance[0][this.arrival];
     }
 
-    this.firstPerson = this.userService.getFirstperson();
-    // this.allDetails.passengers[0].name = this.firstPerson[0];
-    // this.allDetails.passengers[0].surname = this.firstPerson[1];
-
     this.calculateTotalCost('first');
-    
   }
 
   ngOnDestroy() {
@@ -84,14 +82,14 @@ export class SummaryComponent {
   choseSeat(position: number) {
     this.planeVisible = true;
     this.openId = position;
-    console.log(position)
+    console.log(position);
     this.seatSubscription = fromEvent(
       document.getElementsByClassName('seat'),
       'click'
     ).subscribe({
       next: (el: any) => {
         this.allDetails.passengers[position].seat = el.target.innerHTML;
-        
+
         if (el.target.name === 'clear') {
           el.target.name = 'checked';
         } else {
@@ -131,5 +129,12 @@ export class SummaryComponent {
       this.totalCost += this.allDetails.passengers[i].price;
       this.totalCost += Number(this.allDetails.passengers[i].luggage);
     }
+  }
+
+  changeName(position:number, value:string){
+    this.allDetails.passengers[position].name=value
+  }
+  changeSurname(position:number, value:string){
+    this.allDetails.passengers[position].surname=value
   }
 }

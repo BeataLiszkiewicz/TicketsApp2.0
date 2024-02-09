@@ -27,8 +27,9 @@
           type="text"
           name="name"
           class="two"
+          #name
           [value]="allDetails.passengers[i].name"
-          [(ngModel)]="person.name"
+          (change)="changeName(i, name.value)"
           required
         />
 
@@ -37,8 +38,9 @@
           type="text"
           name="surname"
           class="two"
+          #surname
           [value]="allDetails.passengers[i].surname"
-          [(ngModel)]="person.surname"
+          (change)="changeSurname(i, surname.value)"
           required
         />
         <ng-container *ngIf="person.ticketClass !== 'Infant'">
@@ -49,8 +51,9 @@
             class="two"
             [value]="allDetails.passengers[i].seat"
             (focus)="choseSeat(i)"
-            required
+
           />
+          <p *ngIf=""></p>
         </ng-container>
         <label for="luggage" class="one">Luggage:</label>
         <select
@@ -59,7 +62,6 @@
           class="two"
           [(ngModel)]="allDetails.passengers[i].luggage"
           (change)="addCost()"
-          required
         >
           <option value="0">Carry-on baggage only</option>
           <option value="{{ extraLuggage }}">
@@ -78,11 +80,8 @@
           {{ person.price * 1 + person.luggage * 1 }} {{ allDetails.currency }}
         </p>
       </div>
+      <button (click)="go()" class="finalized" [disabled]="!fillAllDetails.valid">BOOK AND PAY</button>
     </form>
-
-    <button (click)="go()" class="finalized" [disabled]="!fillAllDetails.valid">
-      BOOK AND PAY
-    </button>
   </div>
 </div>
 
