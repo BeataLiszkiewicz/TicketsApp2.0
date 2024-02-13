@@ -10,6 +10,7 @@ export class BookPlaneService {
   bookPlane=new BehaviorSubject<string>('');
   letPlaneBooking=new BehaviorSubject<boolean>(false);
   mouseoverBooking = new BehaviorSubject<string>('');
+  seeUser=new BehaviorSubject<boolean>(true);
   
   
 
@@ -35,6 +36,14 @@ export class BookPlaneService {
 
   setBookingButton(el:boolean){
     this.letPlaneBooking.next(el);
+    
+  }
+  getUserButton(){
+    return this.seeUser.asObservable();
+  }
+
+  setUserButton(el:boolean){
+    this.seeUser.next(el);
     
   }
 }

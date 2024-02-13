@@ -8,6 +8,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { LogOutComponent } from './components/log-out/log-out.component';
 
 const routes:Routes=[
   {path:'', redirectTo:'home', pathMatch:'full'},
@@ -17,7 +18,8 @@ const routes:Routes=[
   {path:'summary', component:SummaryComponent},
   {path:'plane', component:PlaneSeatsComponent},
   {path:'user', component:CreateUserComponent},
-  {path:'login', component:LogInComponent}
+  {path:'login', component:LogInComponent},
+  {path:'logout', component:LogOutComponent}
  
 ]
 

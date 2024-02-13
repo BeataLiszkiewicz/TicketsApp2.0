@@ -1,7 +1,8 @@
 <div class="nav-bar">
   <a routerLink="/home" class="logoLink"><div class="logo"></div></a>
-  <div class="bookFlyButton" >
-    <button *ngIf="!bookingUnavailable"
+  <div class="bookFlyButton">
+    <button
+      *ngIf="!bookingUnavailable"
       mat-raised-button
       [ngClass]="[!clickToBook ? 'dontBook' : 'book']"
       (mouseover)="fly('on')"
@@ -11,7 +12,7 @@
       BOOK YOUR FLIGHT
     </button>
   </div>
-  <div class="accountButton" (click)="openLogIn()">
+  <div class="accountButton" (click)="openLogIn()" *ngIf="userVisible">
     <button mat-icon-button color="primary">
       <mat-icon fontIcon="person"></mat-icon>
     </button>

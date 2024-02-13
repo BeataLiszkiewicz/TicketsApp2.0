@@ -38,6 +38,7 @@ export class SummaryComponent {
 
   ngOnInit() {
     this.bookService.setBookingButton(true);
+    this.bookService.setUserButton(false);
     this.allDetails = this.passengerService.returnDetails();
     this.firstPerson = this.userService.getFirstperson();
     this.allDetails.passengers[0].name = this.firstPerson[0];
@@ -52,10 +53,13 @@ export class SummaryComponent {
     }
 
     this.calculateTotalCost('first');
+
+
   }
 
   ngOnDestroy() {
     this.passengerService.flightDetailsUpdate(this.allDetails);
+    this.bookService.setUserButton(true);
   }
 
   go() {

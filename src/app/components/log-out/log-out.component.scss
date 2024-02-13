@@ -1,0 +1,16 @@
+@import '../../../myTheme';
+
+.logoutContainer{
+    height: 7rem;
+    width: 30vw;
+    background-color: $background-neutral;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logOutButton{
+        background-color: $background-neutral;
+    }
+
+}
+

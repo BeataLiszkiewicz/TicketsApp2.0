@@ -31,6 +31,7 @@ import { ContainNumberDirective } from './directives/contain-number.directive';
 import { SpecialCharacterDirective } from './directives/special-character.directive';
 import { LoginCheckDirective } from './directives/login-check.directive';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { LogOutComponent } from './components/log-out/log-out.component';
 
 
 
@@ -54,7 +55,8 @@ import { LogInComponent } from './components/log-in/log-in.component';
     ContainNumberDirective,
     SpecialCharacterDirective,
     LoginCheckDirective,
-    LogInComponent
+    LogInComponent,
+    LogOutComponent
   ],
   imports: [
     BrowserModule, 

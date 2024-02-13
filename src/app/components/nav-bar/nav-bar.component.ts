@@ -5,6 +5,7 @@ import { TicketPriceService } from 'src/app/services/ticket-price.service';
 import { UsersListService } from 'src/app/services/users-list.service';
 import { FlyChoiceComponent } from '../fly-choice/fly-choice.component';
 import { LogInComponent } from '../log-in/log-in.component';
+import { LogOutComponent } from '../log-out/log-out.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,6 +15,7 @@ import { LogInComponent } from '../log-in/log-in.component';
 export class NavBarComponent {
   bookingUnavailable: boolean = false;
   clickToBook: boolean = false;
+  userVisible:boolean=true;
 
   constructor(private bookService: BookPlaneService,
     private ticketService:TicketPriceService,
@@ -30,6 +32,14 @@ export class NavBarComponent {
     this.bookService.getBookingButton().subscribe({
       next: (el: any) => {
         this.bookingUnavailable = el;
+      },
+      error: (err: any) => console.log(err),
+    });
+
+    this.bookService.getUserButton().subscribe({
+      next: (el: boolean) => {
+        this.userVisible = el;
+        console.log(this.userVisible)
       },
       error: (err: any) => console.log(err),
     });
@@ -59,18 +69,18 @@ export class NavBarComponent {
  
     openLogIn() {
       if (this.UserService.oneUser.length > 0) {
-        this.dialogRef.open(FlyChoiceComponent, {
+        this.dialogRef.open(LogOutComponent, {
           disableClose: false,
           hasBackdrop: true,
-          backdropClass: '',
-          width: '90vw',
-          maxWidth:'576px',
-          height: '',
+          backdropClass: 'logoutContainer',
+          width: '30vw',
+          maxWidth:'',
+          height: '3rem',
           position: {
-            top: '',
+            top: '5rem',
             bottom: '',
             left: '',
-            right: '',
+            right: '1rem',
           },
         });
        
