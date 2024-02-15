@@ -45,6 +45,10 @@ export class UsersListService {
     );
   }
 
+  logOut(){
+    this.oneUser.length=0
+  }
+
   createTemporaryUser(param: any) {
     this.temporaryUser = param;
   }

@@ -10,6 +10,7 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-log-in',
@@ -26,7 +27,8 @@ export class LogInComponent {
   constructor(
     private readonly router: Router,
     private dialogRef: MatDialog,
-    private readonly UserService: UsersListService
+    private readonly UserService: UsersListService,
+    private AuthService:AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class LogInComponent {
 
       if (this.UserService.oneUser.length > 0) {
         this.incorrectLogin = false;
+        this.AuthService.changeAuthentication(true)
         
         if (!this.onlyLogin) {
           this.router.navigate(['/summary']);
@@ -55,6 +58,7 @@ export class LogInComponent {
       }
     } else if (param.valid === true) {
       this.UserService.createTemporaryUser(param.value);
+      this.AuthService.changeAuthentication(true)
       this.router.navigate(['/summary']);
       this.dialogRef.closeAll();
     } else {

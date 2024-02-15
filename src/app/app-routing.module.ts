@@ -9,13 +9,15 @@ import { PlaneSeatsComponent } from './components/plane-seats/plane-seats.compon
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { LogOutComponent } from './components/log-out/log-out.component';
+import { userAuthGuard } from './guards/user-auth.guard';
+
 
 const routes:Routes=[
   {path:'', redirectTo:'home', pathMatch:'full'},
   {path:'home', component:HomeComponent},
   {path:'flyChoice', component:FlyChoiceComponent},
   {path:'calendar', component:DeparturesCalendarComponent},
-  {path:'summary', component:SummaryComponent},
+  {path:'summary', component:SummaryComponent, canActivate:[userAuthGuard]},
   {path:'plane', component:PlaneSeatsComponent},
   {path:'user', component:CreateUserComponent},
   {path:'login', component:LogInComponent},
