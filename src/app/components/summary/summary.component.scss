@@ -103,7 +103,8 @@
   .finalized{
     @include buttonStandard();
     background-color: $background-warn;
-    color:$background-neutral-light;
+    color:$background-neutral;
+    font-weight: bold;
     position: fixed;
     height: 3rem;
     width: 40vw;

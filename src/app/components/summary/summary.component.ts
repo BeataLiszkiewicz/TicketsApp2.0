@@ -66,7 +66,7 @@ export class SummaryComponent {
   }
 
   go() {
-    console.log(this.allDetails);
+    alert (`Deat ${this.firstPerson[0]}! Your tickets are now booked. All details you will find at your e-mail box.`)
   }
 
   availableLuggageType() {
@@ -89,7 +89,6 @@ export class SummaryComponent {
   choseSeat(position: number) {
     this.planeVisible = true;
     this.openId = position;
-    console.log(position);
     this.seatSubscription = fromEvent(
       document.getElementsByClassName('seat'),
       'click'
