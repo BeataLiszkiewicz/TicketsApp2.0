@@ -16,71 +16,72 @@
     </div>
   </div>
   <div class="ticketsContainer">
-    <form #fillAllDetails="ngForm">
-      <div
-        class="passenger"
-        *ngFor="let person of allDetails.passengers; index as i"
+    <form
+      #fillAllDetails="ngForm"
+      class="passenger"
+      *ngFor="let person of allDetails.passengers; index as i"
+    >
+      <p class="ticketClass one">{{ person.ticketClass }}</p>
+      <label for="name" class="one">Name:</label>
+      <input
+        type="text"
+        name="name"
+        class="two"
+        #name
+        
+        [(ngModel)]="allDetails.passengers[i].name"
+        pattern="[A-Za-z]+"
+        required
+      />
+
+      <label for="surname" class="one">Surname</label>
+      <input
+        type="text"
+        name="surname"
+        class="two"
+        #surname
+        
+        [(ngModel)]="allDetails.passengers[i].surname"
+        pattern="[A-Za-z\-]+"
+        required
+      />
+      <ng-container *ngIf="person.ticketClass !== 'Infant'">
+        <label for="seat" class="one">Seat:</label>
+        <input
+          type="text"
+          name="seat"
+          id="seat"
+          class="two"
+          
+          [ngModel]="allDetails.passengers[i].seat"
+          (focus)="choseSeat(i)"
+        />
+      </ng-container>
+      <label for="luggage" class="one">Luggage:</label>
+      <select
+        name="luggage"
+        id="luggage"
+        class="two"
+        value="allDetails.passengers[i].luggage"
+        (change)="addCost()"
       >
-        <p class="ticketClass one">{{ person.ticketClass }}</p>
-        <label for="name" class="one">Name:</label>
-        <input
-          type="text"
-          name="name"
-          class="two"
-          #name
-          [value]="allDetails.passengers[i].name"
-          (change)="changeName(i, name.value)"
-          required
-        />
+        <option value="0">Carry-on baggage only</option>
+        <option value="{{ extraLuggage }}">
+          Checked baggage +{{ extraLuggage }} {{ allDetails.currency }}
+        </option>
+        <option value="{{ extraLuggagePlus }}">
+          Checked baggage plus small bag +{{ extraLuggagePlus }}
+          {{ allDetails.currency }}
+        </option>
+      </select>
 
-        <label for="surname" class="one">Surname</label>
-        <input
-          type="text"
-          name="surname"
-          class="two"
-          #surname
-          [value]="allDetails.passengers[i].surname"
-          (change)="changeSurname(i, surname.value)"
-          required
-        />
-        <ng-container *ngIf="person.ticketClass !== 'Infant'">
-          <label for="seat" class="one">Seat:</label>
-          <input
-            type="text"
-            name="seat"
-            class="two"
-            [value]="allDetails.passengers[i].seat"
-            (focus)="choseSeat(i)"
+      <p class="personCost" *ngIf="person.price !== 0 || person.luggage !== 0">
+        {{ person.price * 1 + person.luggage * 1 }} {{ allDetails.currency }}
+      </p>
 
-          />
-          <p *ngIf=""></p>
-        </ng-container>
-        <label for="luggage" class="one">Luggage:</label>
-        <select
-          name="luggage"
-          id="luggage"
-          class="two"
-          [(ngModel)]="allDetails.passengers[i].luggage"
-          (change)="addCost()"
-        >
-          <option value="0">Carry-on baggage only</option>
-          <option value="{{ extraLuggage }}">
-            Checked baggage +{{ extraLuggage }} {{ allDetails.currency }}
-          </option>
-          <option value="{{ extraLuggagePlus }}">
-            Checked baggage plus small bag +{{ extraLuggagePlus }}
-            {{ allDetails.currency }}
-          </option>
-        </select>
-
-        <p
-          class="personCost"
-          *ngIf="person.price !== 0 || person.luggage !== 0"
-        >
-          {{ person.price * 1 + person.luggage * 1 }} {{ allDetails.currency }}
-        </p>
-      </div>
-      <button (click)="go()" class="finalized" [disabled]="!fillAllDetails.valid">BOOK AND PAY</button>
+      <button (click)="go()" class="finalized" [disabled]="!fillAllDetails.valid">
+        BOOK AND PAY
+      </button>
     </form>
   </div>
 </div>

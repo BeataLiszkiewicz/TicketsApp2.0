@@ -41,6 +41,7 @@ export class LogInComponent {
     this.UserService.changeOnlyLogIn(false);
   }
   continue(param: NgForm) {
+    
     if (this.login !== '' && this.password !== '') {
       this.UserService.logIn([this.login, this.password]);
 

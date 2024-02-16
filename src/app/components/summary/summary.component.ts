@@ -7,6 +7,7 @@ import { PlaneService } from 'src/app/services/plane.service';
 import FlyDistance from '../../../assets/data/flyDistance.json';
 import { Subscription, fromEvent } from 'rxjs';
 import { UsersListService } from 'src/app/services/users-list.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-summary',
@@ -25,6 +26,8 @@ export class SummaryComponent {
   planeVisible: boolean = false;
   seatSubscription!: Subscription;
   totalCost: number = 0;
+
+
 
   constructor(
     private bookService: BookPlaneService,
@@ -112,6 +115,8 @@ export class SummaryComponent {
       },
       error: (err) => console.log('Wystąpił błąd', err),
     });
+
+    
   }
 
   seatClicked() {
