@@ -39,7 +39,6 @@ export class NavBarComponent {
     this.bookService.getUserButton().subscribe({
       next: (el: boolean) => {
         this.userVisible = el;
-        console.log(this.userVisible)
       },
       error: (err: any) => console.log(err),
     });

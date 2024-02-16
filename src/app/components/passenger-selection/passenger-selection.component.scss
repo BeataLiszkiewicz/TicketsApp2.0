@@ -64,6 +64,10 @@
       font-size: 1.3rem
     }
 
+    .info{
+      color: $background-neutral-light;
+    }
+
     .submit {
       @include buttonStandard;
       width: 90%;

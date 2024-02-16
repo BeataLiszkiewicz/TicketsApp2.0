@@ -9,7 +9,7 @@ export class AuthenticationService {
   constructor() { }
 
   changeAuthentication(param:boolean){
-    this.isLogged=param
+    this.isLogged=param;
   }
 
   isAuthenticated(){
